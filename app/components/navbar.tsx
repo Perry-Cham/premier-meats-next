@@ -36,10 +36,10 @@ export default function AppNavbar(props: NavbarProps) {
         </NavbarStart>
         <NavbarGap />
         <NavbarSection>
-          <NavbarItem href="#" isCurrent>
+          <NavbarItem href="/" isCurrent>
             Home
           </NavbarItem>
-          <NavbarItem href="#">Contact</NavbarItem>
+          <NavbarItem href="/contact">Contact</NavbarItem>
           <NavbarItem href="#">About</NavbarItem>
           <Menu>
             <NavbarItem>

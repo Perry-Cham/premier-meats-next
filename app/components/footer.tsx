@@ -1,4 +1,5 @@
 function Footer(){
+  const date = new Date()
   return(
       <footer className="bg-gray-800 text-white py-6 mt-12">
         <div className="container mx-auto px-4">
@@ -20,7 +21,7 @@ function Footer(){
             </a>
           </div>
           <div className="text-center text-gray-400">
-            &copy; Premier Meats 2024
+            &copy; Premier Meats {date.getFullYear()}
           </div>
         </div>
       </footer>)

@@ -18,10 +18,10 @@ import {
 import { Separator } from "@/components/ui/separator"
 
 const categories = [
-  { id: 1, label: "Beef", url: "#" },
-  { id: 2, label: "Pork", url: "#" },
-  { id: 3, label: "Chicken", url: "#" },
-  { id: 4, label: "Processed Meats", url: "#" },
+  { id: 1, label: "Beef", url: "/products/beef" },
+  { id: 2, label: "Pork", url: "/products/pork" },
+  { id: 3, label: "Chicken", url: "/products/chicken" },
+  { id: 4, label: "Processed Meats", url: "/products/processed" },
 ]
 
 export default function AppNavbar(props: NavbarProps) {
@@ -36,10 +36,10 @@ export default function AppNavbar(props: NavbarProps) {
         </NavbarStart>
         <NavbarGap />
         <NavbarSection>
-          <NavbarItem href="#" isCurrent>
+          <NavbarItem href="/" isCurrent>
             Home
           </NavbarItem>
-          <NavbarItem href="#">Contact</NavbarItem>
+          <NavbarItem href="/contact">Contact</NavbarItem>
           <NavbarItem href="#">About</NavbarItem>
           <Menu>
             <NavbarItem>

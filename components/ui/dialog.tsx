@@ -39,8 +39,8 @@ interface DialogHeaderProps extends Omit<React.ComponentProps<"div">, "title"> {
   description?: string
 }
 
-const DialogHeader = ({ className, ...props }: DialogHeaderProps) => {
-  const headerRef = useRef<HTMLHeadingElement>(null)
+const DialogHeader = ({ className, title, description, children, ...props }: DialogHeaderProps) => {
+  const headerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const header = headerRef.current
@@ -69,13 +69,14 @@ const DialogHeader = ({ className, ...props }: DialogHeaderProps) => {
         "relative space-y-1 p-(--gutter) pb-[calc(var(--gutter)---spacing(3))]",
         className,
       )}
+      {...props}
     >
-      {props.title && <DialogTitle>{props.title}</DialogTitle>}
-      {props.description && <DialogDescription>{props.description}</DialogDescription>}
-      {!props.title && typeof props.children === "string" ? (
-        <DialogTitle {...props} />
+      {title && <DialogTitle>{title}</DialogTitle>}
+      {description && <DialogDescription>{description}</DialogDescription>}
+      {!title && typeof children === "string" ? (
+        <DialogTitle>{children}</DialogTitle>
       ) : (
-        props.children
+        children
       )}
     </div>
   )
@@ -108,7 +109,9 @@ const DialogDescription = ({ className, ref, ...props }: DialogDescriptionProps)
   />
 )
 
-interface DialogBodyProps extends React.ComponentProps<"div"> {}
+interface DialogBodyProps extends React.ComponentProps<"div"> {
+  ref?: React.Ref<HTMLDivElement>
+}
 const DialogBody = ({ className, ref, ...props }: DialogBodyProps) => (
   <div
     data-slot="dialog-body"

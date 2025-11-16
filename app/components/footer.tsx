@@ -1,7 +1,8 @@
+
 function Footer(){
   const date = new Date()
   return(
-      <footer className="bg-gray-800 text-white py-6 mt-12">
+      <footer className="bg-gray-800 text-white py-6">
         <div className="container mx-auto px-4">
           <div className="flex justify-center gap-6 mb-4">
             <a href="https://facebook.com" className="text-2xl hover:text-red-500 transition">

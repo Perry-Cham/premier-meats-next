@@ -36,7 +36,7 @@ export default function AppNavbar(props: NavbarProps) {
         </NavbarStart>
         <NavbarGap />
         <NavbarSection>
-          <NavbarItem href="/" isCurrent>
+          <NavbarItem href="/" >
             Home
           </NavbarItem>
           <NavbarItem href="/contact">Contact</NavbarItem>

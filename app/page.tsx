@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Overlay_Card from '@/app/components/overlay_card'
 
 export default function Home() {
   const cardStyles = "max-w-lg md:min-h-[380px] md:w-[25%] bg-white";
@@ -21,10 +22,10 @@ export default function Home() {
   return (
     <main>
       {/* Hero Section */}
-      <section className="bg-[url('https://04nsltlcl2.ufs.sh/f/5OZVqozoH8GNU3KtIkxsiI17QYO4wLt9SGCvjqmzg0WA2Dxc')] bg-cover bg-center h-[94vh] w-[100%] relative">
+      <section className="bg-[url('https://ik.imagekit.io/ypgvaedes/Images/Hero.jpeg?updatedAt=1763243890397')] bg-cover bg-center h-[94vh] w-[100%] relative">
         <div className="absolute bg-black/70 inset-0 z-[1]"></div>
         <div className="absolute flex flex-col justify-center items-center inset-0 z-10 h-[100%]">
-          <h1 className="font-bold text-white text-5xl">
+          <h1 className="font-bold text-white text-3xl md:text-5xl">
             <span className="block text-center my-2">Welcome</span>
             <span className="block text-center my-2"> To</span>
             <span className="block text-center my-2">Premier Empire Meats</span>
@@ -58,6 +59,7 @@ export default function Home() {
                   <TrendingUp size={iconSize} />
                 </div>
                 <CardTitle className={cardTitleStyles}>Our Vision</CardTitle>
+                <div className="flex justify-center align-center"><HandCoins/></div>
               </CardHeader>
               <CardContent className={contentStyles}>
                 To be the most customer-centered and dominant meat production,
@@ -77,6 +79,7 @@ export default function Home() {
                   <Target size={iconSize} />
                 </div>
                 <CardTitle className={cardTitleStyles}>Our Mission</CardTitle>
+                                <div className="flex justify-center align-center"><Target/></div>
               </CardHeader>
               <CardContent className={contentStyles}>
                 To be a company that meets clients needs wherever they are
@@ -97,6 +100,7 @@ export default function Home() {
                   <HandCoins size={iconSize} />
                 </div>
                 <CardTitle className={cardTitleStyles}>Our Strength</CardTitle>
+                <div className="flex justify-center align-center"><TrendingUp/></div>
               </CardHeader>
               <CardContent className={contentStyles}>
                 Our strength in this industry is our unlimited capacity to
@@ -111,6 +115,32 @@ export default function Home() {
             </Card>
           </div>
         </div>
+      </section>
+      <section className="py-4">
+        <h2 className="text-xl mb-4 text-center font-bold">~Our Products~</h2>
+        <div className="flex justify-center items-center gap-8 flex-col md:flex-row">
+                  <Overlay_Card
+          title={"Beef"}
+          link={"/products/beef"}
+          bgUrl={"https://ik.imagekit.io/ypgvaedes/Product%20Images/Aesthetic%20Photos/TBone5_900x600.webp"}
+        />
+        <Overlay_Card
+          title={"Pork"}
+          link={"/products/pork"}
+          bgUrl={"https://ik.imagekit.io/ypgvaedes/Product%20Images/Aesthetic%20Photos/Pork-Loin-TJops.png"}
+        />
+        <Overlay_Card
+          title={"Chicken"}
+          link={"/products/chicken"}
+          bgUrl={"https://ik.imagekit.io/ypgvaedes/Product%20Images/Aesthetic%20Photos/RawWholeChicken.jpg?updatedAt=1763153733306"}
+        />
+        <Overlay_Card
+          title={"Processed Meats"}
+          link={"/products/processed"}
+          bgUrl={'https://ik.imagekit.io/ypgvaedes/Product%20Images/Aesthetic%20Photos/meat_counter_in_the_supermarket_1190595804.jpg'}
+        />
+        </div>
+
       </section>
     </main>
   );

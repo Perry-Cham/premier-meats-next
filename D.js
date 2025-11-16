@@ -10,9 +10,8 @@ async function connect() {
     subcategory: String
   })
 
-  const beef = mongoose.model('Beef', schema, "Processed")
-  const data = fs.readFileSync('./t.json')
-  const p = JSON.parse(data)
- await beef.insertMany(p).then(() => console.log("data inserted successfully"))
+  const beef = mongoose.model('Beef', schema, "Beef")
+  const test = await beef.find({})
+  console.log(test)
 }
 connect()

@@ -1,5 +1,16 @@
 import Intro from '@/app/components/intro'
-function Processed(){
+import axios from 'axios'
+import Product_Card from '@/app/components/product_card'
+async function fetchData(){
+  try{
+    const response = await axios.get(`${process.env.NODE_URL}/api/getproducts/processed`)
+    return response.data
+  }catch(err){
+    console.error(err)
+  }
+}
+async function Processed(){
+  const data = await fetchData()
   const message = 
   <>
         <p>
@@ -19,6 +30,9 @@ function Processed(){
   return(
   <main className="px-2">
    <Intro title="Our Processed Meats" message={message} />
+       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-2">
+        {data && data.map((p) => (<Product_Card name={p.name} price={p.price} imagesrc={p.image}/>))}
+      </div>
   </main>
   )
 }

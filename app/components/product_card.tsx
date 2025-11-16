@@ -5,13 +5,13 @@ interface Props{
 }
 function Card({name, price, imagesrc}:Props){
   return(
-  <div>
+  <div className="">
     <div>
     <img src={imagesrc}/>
     </div>
     <div>
-      <p>{name}</p>
-      <p>{price}</p>
+      <p className="font-bold">{name}</p>
+      <p className="font-bold">{price}</p>
     </div>
   </div>
   )

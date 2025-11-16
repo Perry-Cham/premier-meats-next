@@ -59,7 +59,6 @@ export default function Home() {
                   <TrendingUp size={iconSize} />
                 </div>
                 <CardTitle className={cardTitleStyles}>Our Vision</CardTitle>
-                <div className="flex justify-center align-center"><HandCoins/></div>
               </CardHeader>
               <CardContent className={contentStyles}>
                 To be the most customer-centered and dominant meat production,
@@ -79,7 +78,6 @@ export default function Home() {
                   <Target size={iconSize} />
                 </div>
                 <CardTitle className={cardTitleStyles}>Our Mission</CardTitle>
-                                <div className="flex justify-center align-center"><Target/></div>
               </CardHeader>
               <CardContent className={contentStyles}>
                 To be a company that meets clients needs wherever they are
@@ -100,7 +98,6 @@ export default function Home() {
                   <HandCoins size={iconSize} />
                 </div>
                 <CardTitle className={cardTitleStyles}>Our Strength</CardTitle>
-                <div className="flex justify-center align-center"><TrendingUp/></div>
               </CardHeader>
               <CardContent className={contentStyles}>
                 Our strength in this industry is our unlimited capacity to
@@ -117,7 +114,7 @@ export default function Home() {
         </div>
       </section>
       <section className="py-4">
-        <h2 className="text-xl mb-4 text-center font-bold">~Our Products~</h2>
+        <h2 className="text-3xl mb-4 text-center font-bold">~Our Products~</h2>
         <div className="flex justify-center items-center gap-8 flex-col md:flex-row">
                   <Overlay_Card
           title={"Beef"}

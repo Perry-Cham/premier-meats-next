@@ -1,79 +1,44 @@
 [
-{
-"name": "Whole Chicken",
-"category": "Poultry Products",
-"price": "30.00",
-"image": "https://04nsltlcl2.ufs.sh/f/5OZVqozoH8GNeZRWQdIZPBCxGgVmHRiF3SdU0vnWlTqXo2ze",
-"key": "5OZVqozoH8GNeZRWQdIZPBCxGgVmHRiF3SdU0vnWlTqXo2ze"
-},
-{
-"name": "Chicken Breast",
-"category": "Poultry Products",
-"price": "20.00",
-"image": "",
-"key": ""
-},
-{
-"name": "Chicken Breast Fillet",
-"category": "Poultry Products",
-"price": "22.00",
-"image": "",
-"key": ""
-},
-{
-"name": "Chicken Mince",
-"category": "Poultry Products",
-"price": "15.00",
-"image": "",
-"key": ""
-},
-{
-"name": "Chicken Drumsticks",
-"category": "Poultry Products",
-"price": "12.00",
-"image": "https://04nsltlcl2.ufs.sh/f/5OZVqozoH8GN80TS7a51egrXtH7KWsSEcahlfOyGbnj0vBxu",
-"key": "5OZVqozoH8GN80TS7a51egrXtH7KWsSEcahlfOyGbnj0vBxu"
-},
-{
-"name": "Chicken Thigh",
-"category": "Poultry Products",
-"price": "14.00",
-"image": "https://04nsltlcl2.ufs.sh/f/5OZVqozoH8GNVBAF3OGyvJAEXsNwmnz0lgWfqocY6RBkMbtj",
-"key": "5OZVqozoH8GNVBAF3OGyvJAEXsNwmnz0lgWfqocY6RBkMbtj"
-},
-{
-"name": "Chicken Stir-fry",
-"category": "Poultry Products",
-"price": "18.00",
-"image": "https://04nsltlcl2.ufs.sh/f/5OZVqozoH8GNzvPM5MxmOhqbgmT5s3n2Ij9UZoRHM7FKY0cv",
-"key": "5OZVqozoH8GNzvPM5MxmOhqbgmT5s3n2Ij9UZoRHM7FKY0cv"
-},
-{
-"name": "Chicken burger patties",
-"category": "Poultry Products",
-"price": "16.00",
-"image": "",
-"key": ""
-},
-{
-"name": "Chicken offals",
-"category": "Poultry Products",
-"price": "8.00",
-"image": "",
-"key": ""
-},
-{
-"name": "Mixed Portion",
-"category": "Poultry Products",
-"price": "25.00",
-"image": "",
-"key": ""
-},
-{
-"name": "Chicken feet, neck and heads pack",
-"category": "Poultry Products",
-"price": "10.00",
-"image": "",
-"key": ""
-}
+  {
+    "name": "Whole Chicken",
+    "price": 77,
+    "image": "https://ik.imagekit.io/ypgvaedes/Product%20Images/Chicken/whole-chicken.jpg",
+    "subcategory": "Poultry"
+  },
+  {
+    "name": "Chicken Breast",
+    "price": 84,
+    "image": "https://ik.imagekit.io/ypgvaedes/Product%20Images/Chicken/RawChickenBreast_076d3c81-6fc2-430a-869f-d8237636a078.webp",
+    "subcategory": "Poultry"
+  },
+  {
+    "name": "Chicken Breast Fillet",
+    "price": 91,
+    "image": "https://ik.imagekit.io/ypgvaedes/Product%20Images/Chicken/PVF-chickenfillet_1000x.webp",
+    "subcategory": "Poultry"
+  },
+  {
+    "name": "Chicken Mince",
+    "price": 69,
+    "image": "https://ik.imagekit.io/ypgvaedes/Product%20Images/Chicken/chicken-mince.jpg",
+    "subcategory": "Poultry"
+  },
+  {
+    "name": "Chicken Drumsticks",
+    "price": 63,
+    "image": "https://ik.imagekit.io/ypgvaedes/Product%20Images/Chicken/chicken%20drumsticks.jfif",
+    "subcategory": "Poultry"
+  },
+  {
+    "name": "Chicken Thigh",
+    "price": 67,
+    "image": "https://ik.imagekit.io/ypgvaedes/Product%20Images/Chicken/chicken%20thigh.jfif",
+    "subcategory": "Poultry"
+  },
+  {
+    "name": "Chicken Stir-fry",
+    "price": 72,
+    "image": "https://ik.imagekit.io/ypgvaedes/Product%20Images/Chicken/chicken-stir-fry-959368-1.jpg",
+    "subcategory": "Poultry"
+  }
 ]

@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import TrendingUp from 'lucide-react'
+import {TrendingUp, Target, HandCoins} from 'lucide-react'
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Overlay_Card from '@/app/components/overlay_card'
 
 export default function Home() {
   const cardStyles = "max-w-lg min-h-[300px] md:w-[25%] bg-white"
@@ -18,10 +19,10 @@ export default function Home() {
   return (
     <main>
       {/* Hero Section */}
-      <section className="bg-[url('https://04nsltlcl2.ufs.sh/f/5OZVqozoH8GNU3KtIkxsiI17QYO4wLt9SGCvjqmzg0WA2Dxc')] bg-cover bg-center h-[94vh] w-[100%] relative">
+      <section className="bg-[url('https://ik.imagekit.io/ypgvaedes/Images/Hero.jpeg?updatedAt=1763243890397')] bg-cover bg-center h-[94vh] w-[100%] relative">
         <div className="absolute bg-black/70 inset-0 z-[1]"></div>
         <div className="absolute flex flex-col justify-center items-center inset-0 z-10 h-[100%]">
-          <h1 className="font-bold text-white text-5xl">
+          <h1 className="font-bold text-white text-3xl md:text-5xl">
             <span className="block text-center my-2">Welcome</span>
             <span className="block text-center my-2"> To</span>
             <span className="block text-center my-2">Premier Empire Meats</span>
@@ -44,13 +45,14 @@ export default function Home() {
           for your needs
         </p>
         <div>
-          <div className="flex justify-around items-center mt-4">
+          <div className="flex flex-col md:flex-row justify-around items-center gap-4 mt-4">
             <Card className={cardStyles}>
               <CardHeader>
                 <CardTitle className={cardTitleStyles}>Our Vision</CardTitle>
+                <div className="flex justify-center align-center"><HandCoins/></div>
               </CardHeader>
               <CardContent>
-               To be the most customer-centered and dominant meat production, processing and supply company in the national and regional markets.
+                To be the most customer-centered and dominant meat production, processing and supply company in the national and regional markets.
               </CardContent>
               <CardFooter>
                 <Button className={cardButtonStyles}>Learn More</Button>
@@ -60,6 +62,7 @@ export default function Home() {
             <Card className={cardStyles}>
               <CardHeader>
                 <CardTitle className={cardTitleStyles}>Our Mission</CardTitle>
+                                <div className="flex justify-center align-center"><Target/></div>
               </CardHeader>
               <CardContent>
                 To be a company that meets food needs wherever they are locally , regionally and internationally
@@ -72,6 +75,7 @@ export default function Home() {
             <Card className={cardStyles}>
               <CardHeader>
                 <CardTitle className={cardTitleStyles}>Our Strength</CardTitle>
+                <div className="flex justify-center align-center"><TrendingUp/></div>
               </CardHeader>
               <CardContent>
                 Our strength in this industry is our unlimited capacity to deliver nationwide with-in 48hours of receiving orders and to be a one-stop supplier for an assortment of meats
@@ -82,6 +86,32 @@ export default function Home() {
             </Card>
           </div>
         </div>
+      </section>
+      <section className="py-4">
+        <h2 className="text-xl mb-4 text-center font-bold">~Our Products~</h2>
+        <div className="flex justify-center items-center gap-8 flex-col md:flex-row">
+                  <Overlay_Card
+          title={"Beef"}
+          link={"/products/beef"}
+          bgUrl={"https://ik.imagekit.io/ypgvaedes/Product%20Images/Aesthetic%20Photos/TBone5_900x600.webp"}
+        />
+        <Overlay_Card
+          title={"Pork"}
+          link={"/products/pork"}
+          bgUrl={"https://ik.imagekit.io/ypgvaedes/Product%20Images/Aesthetic%20Photos/Pork-Loin-TJops.png"}
+        />
+        <Overlay_Card
+          title={"Chicken"}
+          link={"/products/chicken"}
+          bgUrl={"https://ik.imagekit.io/ypgvaedes/Product%20Images/Aesthetic%20Photos/RawWholeChicken.jpg?updatedAt=1763153733306"}
+        />
+        <Overlay_Card
+          title={"Processed Meats"}
+          link={"/products/processed"}
+          bgUrl={'https://ik.imagekit.io/ypgvaedes/Product%20Images/Aesthetic%20Photos/meat_counter_in_the_supermarket_1190595804.jpg'}
+        />
+        </div>
+
       </section>
     </main>
   );

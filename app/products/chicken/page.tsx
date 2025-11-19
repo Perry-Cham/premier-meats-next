@@ -15,7 +15,8 @@ const fetchProducts = async () => {
     
 async function Chicken() {
   const products = await fetchProducts()
-  const message =<><p>
+  const message =<>
+    <p>
           PREMIER MEATS aims to be a major role player when it comes to chicken
           supply in Zambia.
         </p>
@@ -30,7 +31,7 @@ async function Chicken() {
   return (
     <main className="px-2">
       <Intro title="Our Chicken" message={message} />
-      <div>
+      <div className="product-display">
         {products && products.map((p) => (<Product_Card key={p.id} name={p.name} price={p.price} imagesrc={p.image}/>))}
       </div>
     </main>

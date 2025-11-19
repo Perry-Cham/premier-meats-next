@@ -23,7 +23,7 @@ async function Pork(){
   return(
   <main className="px-2">
    <Intro title="Our Pork" message={message} />
-      <div>
+      <div className="product-display">
         {data && data.map((p) => (<Product_Card name={p.name} price={p.price} imagesrc={p.image}/>))}
       </div>
   </main>

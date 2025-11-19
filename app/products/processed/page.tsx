@@ -30,7 +30,7 @@ async function Processed(){
   return(
   <main className="px-2">
    <Intro title="Our Processed Meats" message={message} />
-       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-2">
+       <div className="product-display">
         {data && data.map((p) => (<Product_Card name={p.name} price={p.price} imagesrc={p.image}/>))}
       </div>
   </main>

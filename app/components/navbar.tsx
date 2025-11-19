@@ -40,7 +40,7 @@ export default function AppNavbar(props: NavbarProps) {
             Home
           </NavbarItem>
           <NavbarItem href="/contact">Contact</NavbarItem>
-          <NavbarItem href="#">About</NavbarItem>
+          <NavbarItem href="/about">About</NavbarItem>
           <Menu>
             <NavbarItem>
               Products

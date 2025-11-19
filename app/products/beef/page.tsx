@@ -1,8 +1,5 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import Intro from '@/app/components/intro';
-
+import axios from 'axios'
 interface Product {
   _id: string;
   name: string;
@@ -10,12 +7,17 @@ interface Product {
   image: string;
   subcategory: string;
 }
-
-function Beef() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
+const fetchProducts = async () => {
+      try{
+        const response = await axios.get(`${process.env.NODE_URL}/api/getproducts/beef`)
+        return response.data
+      }catch(err){
+        console.error(err)
+        alert("There was an issue fetching the products")
+      }
+    };
+async function Beef() {
+ const products = await fetchProducts()
   const message = (
     <>
       <p>
@@ -28,36 +30,9 @@ function Beef() {
       <p>Our Main Beef Lines are as follows:</p>
     </>
   );
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/getproducts/beef');
-        
-        if (!response.ok) {
-          throw new Error('Failed to fetch products');
-        }
-        
-        const data = await response.json();
-        setProducts(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-        console.error('Error fetching products:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
   return (
     <main className="px-2">
       <Intro title="Our Beef" message={message} />
-      
-      {loading && <p>Loading products...</p>}
-      {error && <p className="text-red-500">Error: {error}</p>}
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
         {products.map((product) => (

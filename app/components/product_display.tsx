@@ -1,0 +1,48 @@
+import Product_Card from './product_card'
+import axios from 'axios'
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+  image: string;
+  subcategory: string;
+}
+
+const fetchProducts = async (product) => {
+      try{
+        const response = await axios.get(`${process.env.NODE_URL}/api/getproducts/${product}`)
+        return response.data
+      }catch(err){
+        console.error(err)
+        alert("There was an issue fetching the products")
+      }
+    };
+    
+async function Product_Display({productName}){
+const products = await fetchProducts(productName)
+ const categories = products.reduce((acc, curr) => {
+  // Ensure the array exists
+  if (!acc[curr.subcategory]) {
+    acc[curr.subcategory] = [];
+  }
+  // Always push the current product
+  acc[curr.subcategory].push(curr);
+  return acc;
+}, {} as Record<string, Product[]>);
+  return(
+          <div className="bg-gray-100 p-1 pb-4 rounded-lg mt-3 md:2">
+   <div className="">     
+      {Object.entries(categories).map(([key, value]) =>(
+      <>
+        <div className="text-center font-bold text-white bg-red-600 rounded my-3 text-xl md:bg-[inherit] md:text-red-600 md:mt-10">{key}</div>
+<div className="grid grid-cols-2 md:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] lg:grid-cols-3 gap-4">
+        {value.map(p => (
+        <Product_Card key={p.id} name={p.name} price={p.price} imagesrc={p.image}/>
+      ))}
+        </div>
+      </>))}
+      </div>
+      </div>
+    )
+}
+export default Product_Display

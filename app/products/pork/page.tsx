@@ -1,16 +1,9 @@
 import Intro from '@/app/components/intro'
 import axios from 'axios'
 import Product_Card from '@/app/components/product_card'
-async function fetchData(){
-  try{
-    const response = await axios.get(`${process.env.NODE_URL}/api/getproducts/pork`)
-    return response.data
-  }catch(err){
-    console.error(err)
-  }
-}
+import Product_Display from '@/app/components/product_display'
+
 async function Pork(){
-  const data = await fetchData()
   const message = 
   <>
             <p>
@@ -23,9 +16,7 @@ async function Pork(){
   return(
   <main className="px-2">
    <Intro title="Our Pork" message={message} />
-      <div className="product-display">
-        {data && data.map((p) => (<Product_Card name={p.name} price={p.price} imagesrc={p.image}/>))}
-      </div>
+   <Product_Display productName="pork" />
   </main>
   )
 }

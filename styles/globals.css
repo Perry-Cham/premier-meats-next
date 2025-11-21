@@ -8,9 +8,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @config "../tailwind.config.js";
-.product-display{
- @apply grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-8
-}
+
 @theme inline {
 
   --radius-sm: var(--radius-sm);

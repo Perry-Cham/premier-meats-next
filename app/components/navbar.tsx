@@ -54,6 +54,7 @@ export default function AppNavbar(props: NavbarProps) {
               )}
             </MenuContent>
           </Menu>
+                    <NavbarItem href="/signin">Login</NavbarItem>
         </NavbarSection>
         <NavbarSpacer />
         <NavbarSection className="max-md:hidden">

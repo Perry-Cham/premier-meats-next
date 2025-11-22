@@ -14,20 +14,42 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 export const title = "Login Card";
-
-const Example = () => {
+interface Props{
+  type:"login" | "signup",
+  sendData:(data: {email: string, password: string, name?:string}) => void
+}
+function Sign_In_Card({type, sendData}: Props){
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+function handleSubmit(){
+  const data = {
+    email: email,
+    password:password
+  }
+  if(type === "signup")data.name = name
+  sendData(data)
+}
   return (
     <Card className="md:w-[300px] max-w-sm">
       <CardHeader>
-        <CardTitle>Login to your account</CardTitle>
+        <CardTitle>{type == "login" ? "Login to your account" : "Create an Account"}</CardTitle>
         <CardDescription>
-          Enter your email below to login to your account
+          Enter your email
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        {type === "signup" && <div className="space-y-2">
+          <Label htmlFor="name">Name</Label>
+          <Input
+            id="name"
+            onChange={(e) => setName(e.target.value)}
+            placeholder="John Doe"
+            type="text"
+            value={name}
+          />
+        </div>}
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
           <Input
@@ -41,9 +63,9 @@ const Example = () => {
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <Label htmlFor="password">Password</Label>
-            <a className="text-sm hover:underline" href="#">
+         { type == "login" && <a className="text-sm hover:underline" href="#">
               Forgot your password?
-            </a>
+            </a>}
           </div>
           <Input
             id="password"
@@ -52,18 +74,20 @@ const Example = () => {
             value={password}
           />
         </div>
-        <Button className="w-full bg-red-800 text-white">Login</Button>
+        <Button onClick={handleSubmit} className="w-full bg-red-800 text-white">{
+         type == "login" ? "Login" : "Create Account"
+        }</Button>
       </CardContent>
-      <CardFooter className="flex justify-center">
+     {type == "login" && <CardFooter className="flex justify-center">
         <p className="text-muted-foreground text-sm">
           Don't have an account?{" "}
-          <a className="underline" href="#">
+          <a className="underline" href="/signup">
             Sign up
           </a>
         </p>
-      </CardFooter>
+      </CardFooter>}
     </Card>
   );
 };
 
-export default Example;
+export default Sign_In_Card

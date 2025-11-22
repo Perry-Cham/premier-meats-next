@@ -192,6 +192,9 @@ The project includes Vercel configuration for seamless deployment:
 3. Set environment variables in Vercel dashboard
 4. Vercel will automatically build and deploy on every push
 
+## AUTHENTICATION 
+The project uses Authjs with JWT for the authentication of admin users. 
+
 ## API
 
 ### Get Products by Category
@@ -220,6 +223,26 @@ The project includes Vercel configuration for seamless deployment:
   "error": "Invalid product type"
 }
 ```
+## POST ROUTES 
+
+**NOTE**: User app privelages are decided by authentication level. All new users start with authentication level 0 meaning that they cannot edit prices and or grant other users elevated privelages. Only the Admin user with authentication level 2 can grant elevated privalages to other users. At least authentication level 1 is required to make changes to the product catalogue.
+
+**/api/createUser**
+This route takes in an email, name and password stringbto create a new user with authentication level 0 
+
+**/api/newproduct** 
+This route receives is used by users with admin authentication level 1 to create new products of the schema 
+```
+{
+name:string,
+price:number,
+image:string,
+subcategory:string
+}
+```
+
+**/api/editproduct**
+Allows users of authentication level 1 to edit product details within the database
 
 ## Key Features
 

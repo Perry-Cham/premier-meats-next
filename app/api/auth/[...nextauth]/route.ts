@@ -22,7 +22,7 @@ const handler = nextAuth({
         if (!user) return null;
         const isValid = await compare(password, user.password);
         if (isValid) {
-          return { name: user.name, email: user.email };
+          return {id:user._id.toString(), name: user.name, email: user.email };
         }
         return null;
       }

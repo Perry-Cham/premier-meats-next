@@ -18,13 +18,18 @@ interface Props{
   type:"login" | "signup",
   sendData:(data: {email: string, password: string, name?:string}) => void
 }
+interface account_data{
+  email:string,
+  password:string,
+  name?:string
+}
 function Sign_In_Card({type, sendData}: Props){
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
 function handleSubmit(){
-  const data = {
+  const data: account_data = {
     email: email,
     password:password
   }

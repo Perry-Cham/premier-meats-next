@@ -1,5 +1,5 @@
-import mongoose,{Connection} from "mongoose"
-function connectDB(): Promise<Connection>{
+import mongoose from "mongoose"
+function connectDB(){
   if(mongoose.connection.readyState == 1){
     console.log("Mongoose has already been connected")
     return mongoose.connection

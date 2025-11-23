@@ -6,7 +6,7 @@ interface data {
   email: string,
   password:string
 }
-function SignUp(): void{
+function SignUp(){
   const router = useRouter()
  async function sendData(data: data){
    console.log(data)

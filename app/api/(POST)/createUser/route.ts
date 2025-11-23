@@ -1,6 +1,6 @@
 import {NextRequest,NextResponse} from "next/server"
 import connectDB from "@/lib/db"
-import userModel from "@/models/user-model"
+import userModel from '@/models/user-model'
 import {hash} from "bcrypt"
 export async function POST(req: NextRequest){
   try{
@@ -13,9 +13,10 @@ export async function POST(req: NextRequest){
   const user = new userModel({
     name,
     email,
-    password:hashedPassword
+    password:hashedPassword,
+    authorization:0
   })
-  await user.save 
+  await user.save()
   return NextResponse.json({message:"USER_CREATED_SUCCESSFULLY"},{status:201})
   }catch(err){
     console.error(err)

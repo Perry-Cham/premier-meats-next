@@ -3,7 +3,7 @@ import {NextRequest,NextResponse} from "next/server"
 import { BeefProduct, PorkProduct, ProcessedProduct, ChickenProduct } from "@/models/product-models"
 import mongoose from "mongoose"
 
-export async function POST(req: NextRequest){
+export async function PUT(req: NextRequest){
   try{
   const entry = await req.json()
  await connectDB
@@ -14,10 +14,11 @@ export async function POST(req: NextRequest){
   chicken: ChickenProduct,
 };
 const category = entry.category
-await models[entry.category].insertOne(entry)
+await models[entry.category].replaceOne({_id:entry.id}, entry)
 NextResponse.json({message:"SUCCESS"},{status:200})
   }catch(err){
   console.log(err)
   NextResponse.json({message:"INTERNAL_SERVER_ERROR"},{status:500})
   }
+  
 }

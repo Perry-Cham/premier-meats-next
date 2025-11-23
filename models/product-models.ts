@@ -1,5 +1,11 @@
 import mongoose from "mongoose"
-const schema = new mongoose.Schema({
+interface Product{
+  name: string,
+  price: number,
+  image: string,
+  subcategory: string
+}
+const schema = new mongoose.Schema<Product>({
   name: String,
   price: Number,
   image: String,

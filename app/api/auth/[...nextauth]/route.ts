@@ -17,12 +17,12 @@ const handler = nextAuth({
         const { email, password } = credentials;
         await connectDB();
         console.log(email, password)
-        const user = await userModel.findOne({ email:email });
+        const user = await userModel.findOne({ email: email });
         console.log(user)
         if (!user) return null;
         const isValid = await compare(password, user.password);
         if (isValid) {
-          return { id: user._id, name: user.name, email: user.email };
+          return { name: user.name, email: user.email };
         }
         return null;
       }
@@ -31,14 +31,12 @@ const handler = nextAuth({
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
         token.name = user.name;
         token.email = user.email;
       }
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
       session.user.name = token.name;
       session.user.email = token.email;
       return session;

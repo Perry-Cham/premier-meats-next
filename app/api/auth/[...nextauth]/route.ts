@@ -16,9 +16,7 @@ const handler = nextAuth({
       async authorize(credentials) {
         const { email, password } = credentials;
         await connectDB();
-        console.log(email, password)
         const user = await userModel.findOne({ email: email });
-        console.log(user)
         if (!user) return null;
         const isValid = await compare(password, user.password);
         if (isValid) {

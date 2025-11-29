@@ -9,7 +9,6 @@ interface data {
 function SignUp(){
   const router = useRouter()
  async function sendData(data: data){
-   console.log(data)
    const response = await axios.post(`/api/createUser`, data)
    if(response.status === 201)router.push("/admin")
  }

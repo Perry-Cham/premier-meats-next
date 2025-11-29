@@ -5,7 +5,6 @@ import {hash} from "bcrypt"
 export async function POST(req: NextRequest){
   try{
       const {name, email, password} = await req.json()
-      console.log(name, email, password)
   const hashedPassword = await hash(password, 10)
   await connectDB()
   const exists = await  userModel.findOne({email:email})

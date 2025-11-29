@@ -48,6 +48,7 @@ export default function AdminProductCard({ product, category }:{product:Product,
         <AdminProductModal
           product={product}
           category={category}
+          type="edit"
           onClose={()=>setEditing(false)}
         />
       )}

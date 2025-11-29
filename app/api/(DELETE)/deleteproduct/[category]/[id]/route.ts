@@ -15,6 +15,6 @@ export async function DELETE(req:NextRequest, {params} :{params: Promise<{id:str
  await models[category].deleteOne({_id:id})
  return NextResponse.json({message:"SUCCESS"},{status:200})
 }catch(err){
-  console.log(err)
+  console.error(err)
   return NextResponse.json({message:"INTERNAL_SERVER_ERROR"},{status:500})
 }}

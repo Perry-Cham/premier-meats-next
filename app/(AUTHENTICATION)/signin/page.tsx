@@ -21,7 +21,7 @@ function Login() {
     if (!res.error) {
       setIsShowing(true);
       router.push("/admin");
-    } else console.log(res.error);
+    } else console.error(res.error);
   }
   const setIsShowing = useNavStore((state) => state.setIsShowing);
   setIsShowing(false);

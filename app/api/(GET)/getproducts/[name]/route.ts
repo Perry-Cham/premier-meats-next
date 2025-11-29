@@ -30,15 +30,15 @@ export async function GET(
   try {
     // Await params as per Next.js 16 requirements
     const { name } = await params;
-    console.log("Fetching products for collection:", name);
+
     // Connect to MongoDB if not already connected
     if (mongoose.connection.readyState === 0) {
       await mongoose.connect(process.env.MONGO_URI);
-      console.log("Mongoose is connected")
+    
     }
 
     const productType = name.toLowerCase();
-console.log(productType)
+
     // Validate that the product type is one of the allowed collections
     if (!collectionModels[productType]) {
       return NextResponse.json(
@@ -50,7 +50,6 @@ console.log(productType)
     // Fetch all products from the specified collection
     const products = await collectionModels[productType].find({});
 const test = await collectionModels.chicken.find({})
-console.log(products, "Hello")
     return NextResponse.json(products, { status: 200 });
   } catch (error) {
     console.error('Error fetching products:', error);

@@ -17,7 +17,7 @@ const category = entry.category
 await models[category].replaceOne({_id:entry.id}, entry)
 return NextResponse.json({message:"SUCCESS"},{status:200})
   }catch(err){
-  console.log(err)
+  console.error(err)
   return NextResponse.json({message:"INTERNAL_SERVER_ERROR"},{status:500})
   }
   

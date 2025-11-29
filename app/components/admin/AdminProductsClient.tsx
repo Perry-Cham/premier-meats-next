@@ -13,7 +13,6 @@ interface Product {
 
 export default function AdminProductsClient({ products, category }:{products:Array<Product>, category:string}){
   const [createOpen, setCreateOpen] = useState(false)
-console.log(products)
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
@@ -30,7 +29,7 @@ console.log(products)
       </div>
 
       {createOpen && (
-        <AdminProductModal category={category} onClose={()=>setCreateOpen(false)} />
+        <AdminProductModal category={category} type="create" onClose={()=>setCreateOpen(false)} />
       )}
     </div>
   )

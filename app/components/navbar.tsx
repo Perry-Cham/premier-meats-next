@@ -1,4 +1,5 @@
 "use client"
+import useNavStore from "@/stores/navStore"
 import { ChevronDownIcon, MagnifyingGlassIcon, ShoppingBagIcon } from "@heroicons/react/24/outline"
 import { Button } from "@/components/ui/button"
 import { Menu, MenuContent, MenuItem } from "@/components/ui/menu"
@@ -25,8 +26,9 @@ const categories = [
 ]
 
 export default function AppNavbar(props: NavbarProps) {
+  const isShowing = useNavStore((state) => state.isShowing);
   return (
-    <NavbarProvider>
+    isShowing &&<NavbarProvider>
       <Navbar {...props}>
         <NavbarStart>
           <div className="flex justify-start align-center">

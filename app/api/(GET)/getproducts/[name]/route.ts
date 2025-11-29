@@ -30,7 +30,7 @@ export async function GET(
   try {
     // Await params as per Next.js 16 requirements
     const { name } = await params;
-    
+    console.log("Fetching products for collection:", name);
     // Connect to MongoDB if not already connected
     if (mongoose.connection.readyState === 0) {
       await mongoose.connect(process.env.MONGO_URI);

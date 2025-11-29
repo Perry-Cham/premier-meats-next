@@ -14,11 +14,11 @@ export async function PUT(req: NextRequest){
   chicken: ChickenProduct,
 };
 const category = entry.category
-await models[entry.category].replaceOne({_id:entry.id}, entry)
-NextResponse.json({message:"SUCCESS"},{status:200})
+await models[category].replaceOne({_id:entry.id}, entry)
+return NextResponse.json({message:"SUCCESS"},{status:200})
   }catch(err){
   console.log(err)
-  NextResponse.json({message:"INTERNAL_SERVER_ERROR"},{status:500})
+  return NextResponse.json({message:"INTERNAL_SERVER_ERROR"},{status:500})
   }
   
 }

@@ -35,7 +35,7 @@ export default function Home() {
           </a>
         </div>
       </section>
-      <section className="min-h-screen px-4 bg-slate-100 py-8 md:text-lg">
+      <section className="min-h-[90vh] px-4 bg-slate-100 py-8 md:text-lg">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
           Who We Are
         </h2>

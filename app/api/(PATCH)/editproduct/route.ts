@@ -1,5 +1,8 @@
 import connectDB from "@/lib/db"
 import ImageKit from 'imagekit'
+
+// disable automatic response caching for this handler
+export const dynamic = 'force-dynamic'
 import {NextRequest,NextResponse} from "next/server"
 import { BeefProduct, PorkProduct, ProcessedProduct, ChickenProduct } from "@/models/product-models"
 import mongoose from "mongoose"

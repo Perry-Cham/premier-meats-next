@@ -120,7 +120,7 @@ export default function ContactPage() {
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <input type="hidden" name="access_key" value="c6acabb9-e056-4793-a3e6-b63c3cfda25a" />
+              <input type="hidden" name="access_key" value={process.env.WEB3_API_KEY} />
 
               <div>
                 <label className="block text-gray-700 font-semibold mb-2" htmlFor="first-name">First Name</label>

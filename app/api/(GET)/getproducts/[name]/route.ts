@@ -1,4 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+
+// Ensure route responses are treated as dynamic (no automatic caching)
+export const dynamic = 'force-dynamic'
 import mongoose from 'mongoose';
 
 // Define product schema

@@ -18,8 +18,7 @@ interface Props {
   type?: "edit" | "create";
 }
 
-function AdminProductModal({ product, category, onClose, type}: Props): React.JSX.Element {
-  alert(type)
+function AdminProductModal({ product, category, onClose, type = "create" }: Props): React.JSX.Element {
   const [form, setForm] = useState<Product>({
     name: product?.name || "",
     price: product?.price || 0,
@@ -28,6 +27,7 @@ function AdminProductModal({ product, category, onClose, type}: Props): React.JS
     imageFile: null,
   });
   const [busy, setBusy] = useState(false);
+  const [preview, setPreview] = useState<string>(String(product?.image ?? ""));
   const router = useRouter();
 
   function setField(k: keyof Product, v: any) {
@@ -63,24 +63,15 @@ function AdminProductModal({ product, category, onClose, type}: Props): React.JS
       
       // Create or update logic
       if (product && product._id && type === "edit") {
-        // update in same collection
-        if (collection === category) {
-          const res = await axios.post(`/api/editproduct`, data);
+        //update existing
+          const res = await axios.put(`/api/editproduct`, data);
           if (res.status !== 200) throw new Error("Update failed");
-        } else {
-          // move to different collection: delete from old then create in new collection
-          const del = await fetch(`/api/deleteproduct/${category}/${product._id}`, {
-            method: "DELETE",
-          });
-          if (!del.ok) throw new Error("Delete old product failed");
-
-          const res = await axios.post(`/api/newproduct`, data);
-          if (res.status !== 200) throw new Error("Create in new collection failed");
-        }
-      } else if(product && product._id && type === "create")  {
-        alert("Hello")
+        
+      } else {
         // create new
-      const res = await axios.post(`/api/newproduct`, data);
+        // require an image file when creating
+        if (!form.imageFile) throw new Error("Image file required for new products");
+        const res = await axios.post(`/api/newproduct`, data);
         if (res.status !== 200) throw new Error("Create failed");
       }
 
@@ -93,6 +84,23 @@ function AdminProductModal({ product, category, onClose, type}: Props): React.JS
       setBusy(false);
     }
 
+  }
+
+  async function handleDelete() {
+    if (!product || !product._id) return;
+    if (!confirm("Delete this product?")) return;
+    try {
+      setBusy(true);
+      const res = await fetch(`/api/deleteproduct/${category}/${product._id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Delete failed");
+      router.refresh();
+      onClose();
+    } catch (err) {
+      console.error(err);
+      alert("Delete failed");
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -144,10 +152,15 @@ function AdminProductModal({ product, category, onClose, type}: Props): React.JS
             <label className="block text-sm font-medium">Image File</label>
             <input
               accept="image/*"
-              onChange={(e) => setField("imageFile", e.target.files?.[0] || null)}
+              onChange={(e) => {
+                const file = e.target.files?.[0] || null;
+                setField("imageFile", file);
+                if (file) setPreview(URL.createObjectURL(file));
+              }}
               type="file"
               className="w-full border p-2 rounded"
             />
+            {preview && <img src={preview} className="mt-2 max-h-40 object-contain" />}
           </div>
 
           <div>
@@ -164,13 +177,27 @@ function AdminProductModal({ product, category, onClose, type}: Props): React.JS
             </select>
           </div>
 
-          <div className="flex justify-end gap-2">
+            <div className="flex justify-between items-center gap-2">
+              {product && (
+                <div>
+                  <button
+                    type="button"
+                    disabled={busy}
+                    onClick={handleDelete}
+                    className="px-3 py-1 bg-red-600 text-white rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+              <div className="flex justify-end gap-2">
             <button type="button" onClick={onClose} className="px-3 py-1 border rounded">
               Cancel
             </button>
             <button disabled={busy} type="submit" className="px-4 py-2 bg-green-600 text-white rounded">
               {busy ? "Saving..." : "Save"}
             </button>
+              </div>
           </div>
         </form>
       </div>

@@ -17,54 +17,97 @@ Premier Meats is a Next.js 16 application that showcases a comprehensive meat pr
 - **Icons**: Heroicons, Lucide React
 - **Animation**: Framer Motion, Motion React
 - **Package Manager**: npm.
+- **State**: Zustand
 
-## Project Structure
+## Project structure
+
+Top-level layout (matching the workspace):
 
 ```
-premier-meats/
-├── app/                          # Next.js app directory
-│   ├── api/                      # API routes
-│   │   └── (GET)/getproducts/   # Product data endpoints
-│   ├── components/               # Reusable React components
-│   │   ├── navbar.tsx           # Navigation bar
-│   │   ├── footer.tsx           # Footer component
-│   │   ├── product_card.tsx     # Individual product card
-│   │   ├── display.tsx          # Product display grid
-│   │   ├── overlay_card.tsx     # Category overlay cards
-│   │   ├── intro.tsx            # Page introduction section
-│   │   └── card.tsx             # Generic card component
-│   ├── products/                 # Product category pages
-│   │   ├── beef/page.tsx        # Beef products page
-│   │   ├── pork/page.tsx        # Pork products page
-│   │   ├── chicken/page.tsx     # Chicken products page
-│   │   └── processed/page.tsx   # Processed meats page
-│   ├── about/page.tsx           # About page
-│   ├── contact/page.tsx         # Contact and inquiry form
-│   ├── layout.tsx               # Root layout
-│   └── page.tsx                 # Homepage
-├── components/ui/                # shadcn/ui components
-│   ├── button.tsx
+.
+├── .env.local
+├── .git/
+├── .next/
+├── app/
+├── components/
+│   └── ui/                 # shadcn/ui reusable UI primitives
+├── hooks/
+├── lib/
+├── models/
+├── public/
+├── stores/
+├── styles/
+├── types/
+├── components.json
+├── eslint.config.mjs
+├── next.config.js
+├── postcss.config.js
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+└── README.md
+
+```
+
+app/ (app-router) — important pages & API routes
+
+```
+app/
+├── layout.tsx
+├── page.tsx
+├── (AUTHENTICATION)/
+│   ├── signin/page.tsx
+│   └── signup/page.tsx
+├── about/page.tsx
+├── contact/page.tsx
+├── admin/
+│   ├── page.tsx
+│   └── [category]/page.tsx
+├── products/
+│   ├── beef/page.tsx
+│   ├── chicken/page.tsx
+│   ├── pork/page.tsx
+│   └── processed/page.tsx
+├── components/
+│   ├── admin/
+│   │   ├── AdminProductsClient.tsx
+│   │   ├── AdminProductModal.tsx
+│   │   └── AdminProductCard.tsx
 │   ├── card.tsx
+│   ├── display.tsx
+│   ├── footer.tsx
+│   ├── intro.tsx
 │   ├── navbar.tsx
-│   ├── menu.tsx
-│   ├── popover.tsx
-│   └── [other components]
-├── hooks/                         # Custom React hooks
-│   └── use-media-query.ts       # Responsive design hook
-├── lib/                          # Utility functions
-│   ├── primitive.ts             # Render props utilities
-│   └── utils.ts                 # General utilities
-├── styles/                       # Global styles
-│   └── globals.css              # Tailwind imports and theme
-├── public/                       # Static assets
-├── components.json              # shadcn/ui configuration
-├── tailwind.config.js           # Tailwind CSS configuration
-├── tsconfig.json                # TypeScript configuration
-├── eslint.config.mjs            # ESLint configuration
-├── next.config.js               # Next.js configuration
-├── postcss.config.js            # PostCSS configuration
-├── package.json                 # Dependencies and scripts
-└── README.md                    # This file
+│   ├── overlay_card.tsx
+│   ├── product_card.tsx
+│   ├── product_display.tsx
+│   └── sign_in_card.tsx
+└── api/
+   ├── (GET)/
+   │   └── getproducts/[name]/route.ts
+   ├── (POST)/
+   │   ├── createUser/route.ts
+   │   └── newproduct/route.ts
+   ├── (PATCH)/
+   │   └── editproduct/route.ts
+   ├── (DELETE)/
+   │   └── deleteproduct/[category]/[id]/route.ts
+   └── auth/
+      └── [...nextauth]/route.ts
+
+```
+
+Other key folders
+
+```
+components/ui/              # shared UI primitives (shadcn)
+hooks/                      # custom hooks (use-media-query.ts)
+lib/                        # utilities & db connection (db.ts, utils.ts)
+models/                     # mongoose models (product-models.ts, user-model.ts)
+public/                     # static assets
+stores/                     # client stores (navStore.tsx)
+styles/                     # global stylesheet (globals.css)
+types/                      # project types
 ```
 
 ## Getting Started
@@ -93,6 +136,10 @@ premier-meats/
    ```env
    MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database-name
    NODE_URL=http://localhost:3000
+   # ImageKit (required for product image uploads)
+   IMAGEKIT_PUBLIC_KEY=your_public_key
+   IMAGEKIT_PRIVATE_KEY=your_private_key
+   IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id
    ```
   **NOTE**: 
 - Make sure you have a valid mongoDB atlas account to obtain a connection string. create one for free at [mongoDB.com](https://mongodb.com)
@@ -131,6 +178,18 @@ npm start
 # Run ESLint and fix issues
 npm run lint
 ```
+## Breakdown of Environment Variables
+MONGO_URI               : Your mongodb atlas uri, can be replaced with other database as needed but will require you to rewrite the api rutes
+NODE_URL                : The domain of the website, used by axios in server components since it requires absolute paths 
+**Example Usage**
+``
+axios.post(`${process.env.NODE_URL}/editproduct`, data)
+``
+IMAGEKIT_PUBLIC_KEY     : Required for Imagekit SDK, used to upload and delete images
+IMAGEKIT_PRIVATE_KEY    : Required for Imagekit SDK, used to upload and delete images
+IMAGEKIT_URL_ENDPOINT   : Required for Imagekit SDK, used to upload and delete images
+ENVIRONMENT             : Specifies whether the project is running in a production environment, used for logging items to the console
+NEXTAUTH_SECRET         : Used by next-auth to sign jwt tokens, required in production
 
 ## Coding Standards
 
@@ -244,6 +303,62 @@ subcategory:string
 **/api/editproduct**
 Allows users of authentication level 1 to edit product details within the database
 
+### How image uploads work
+
+- `POST /api/newproduct` expects multipart/form-data and requires an `imageFile` field for new products.
+- The server uploads the file to ImageKit under `/product images/[category]` and stores the returned URL in the product document.
+- `PUT /api/editproduct` accepts multipart/form-data and will upload a provided `imageFile` and update the product image URL if you send one.
+
+### Manual test checklist (admin flows)
+
+1. Start dev server with ImageKit env vars set and a working MongoDB connection.
+2. Open the admin view for a category (e.g., `/admin/beef`).
+3. Create a new product using the "Create new product" modal and supply an image file. Verify the image uploads and appears under ImageKit in `/product images/<category>`.
+4. Edit an existing product and change the name/price/subcategory — save and verify the database record updates and the UI refreshes.
+5. Edit a product and upload a new image file — verify ImageKit receives the file and the DB image URL updates.
+6. Delete a product (from the card or the edit modal) — verify the DB record is removed and the UI refreshes.
+
+## Admin API / admin panel endpoints (overview)
+
+The admin UI uses three server endpoints to manage products. All endpoints for modifying products expect an admin-level user 
+
+1) POST /api/newproduct — create new product
+   - Request type: multipart/form-data
+   - Required fields (form data):
+      - category (beef|chicken|pork|processed)
+      - name (string)
+      - price (number)
+      - subcategory (string)
+      - imageFile (file) — image file is required for creating new products
+   - Behavior: server uploads imageFile to ImageKit under the folder `/Product Images/<category>` and saves the returned image URL into the product document before inserting into the database.
+  
+
+2) PUT /api/editproduct — edit existing product
+   - Request type: multipart/form-data
+   - Expected fields (form data):
+      - id (string) — product _id
+      - category (string)
+      - name (string)
+      - price (number)
+      - subcategory (string)
+      - image (string) — optional image URL (if you want to keep an existing URL)
+      - imageFile (file) — optional file to upload which replaces the image
+   - Behavior: if an imageFile is included, the server uploads it to ImageKit under `/product images/<category>` and replaces the stored image URL for that product. Non-empty fields will be updated for the product.
+  
+
+3) DELETE /api/deleteproduct/:category/:id — delete product
+   - Request type: HTTP DELETE
+   - Path params:
+      - category (beef|chicken|pork|processed)
+      - id — product _id
+   - Behavior: deletes the product from the matching collection. If the product had an uploaded image the API will attempt to remove the file from ImageKit (it uses the stored file id). Any ImageKit deletion failures are logged and the product delete will still proceed.
+
+
+Notes & recommendations
+- Use folder names without spaces for predictable paths (we currently use `/product images/<category>`). Using kebab-case `/product-images/<category>` is recommended to avoid accidental encoding issues.
+- The server expects form-data for both new and edit operations so forms can pass files and textual fields together.
+
+
 ## Key Features
 
 - **Product Catalog**: Browse beef, pork, chicken, and processed meat products
@@ -251,4 +366,5 @@ Allows users of authentication level 1 to edit product details within the databa
 - **Contact Form**: Integrated contact form using Web3Forms API
 - **Company Information**: About page with business details and management team
 - **Modern UI**: Built with React Aria Components for accessibility
+- **Admin Panel**: For managing product listings
 

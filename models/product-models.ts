@@ -3,12 +3,14 @@ interface Product{
   name: string,
   price: number,
   image: string,
+  imageId?: string,
   subcategory: string
 }
 const schema = new mongoose.Schema<Product>({
   name: String,
   price: Number,
   image: String,
+  imageId: String,
   subcategory: String
 })
 const BeefProduct = mongoose.models.beef || mongoose.model('beef', schema, "Beef");

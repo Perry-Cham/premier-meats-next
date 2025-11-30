@@ -19,6 +19,7 @@ interface Props {
 }
 
 function AdminProductModal({ product, category, onClose, type}: Props): React.JSX.Element {
+  alert(type)
   const [form, setForm] = useState<Product>({
     name: product?.name || "",
     price: product?.price || 0,
@@ -58,7 +59,8 @@ function AdminProductModal({ product, category, onClose, type}: Props): React.JS
       } else if (form.image) {
         data.append("image", String(form.image));
       }
-
+  
+      
       // Create or update logic
       if (product && product._id && type === "edit") {
         // update in same collection
@@ -76,8 +78,9 @@ function AdminProductModal({ product, category, onClose, type}: Props): React.JS
           if (res.status !== 200) throw new Error("Create in new collection failed");
         }
       } else if(product && product._id && type === "create")  {
+        alert("Hello")
         // create new
-        const res = await axios.post(`/api/newproduct`, data);
+      const res = await axios.post(`/api/newproduct`, data);
         if (res.status !== 200) throw new Error("Create failed");
       }
 
@@ -89,6 +92,7 @@ function AdminProductModal({ product, category, onClose, type}: Props): React.JS
     } finally {
       setBusy(false);
     }
+
   }
 
   return (

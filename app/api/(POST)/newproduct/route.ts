@@ -6,10 +6,8 @@ import mongoose from "mongoose"
 
 export async function POST(req: NextRequest){
   try{
-  const entry = await req.json()
-  const entry2 = await req.formData()
-  console.log("hi",entry,entry2)
- /*await connectDB()
+  const entry = await req.
+ await connectDB()
   const models: Record<string, mongoose.Model<any>> = {
   beef: BeefProduct,
   pork: PorkProduct,
@@ -17,7 +15,7 @@ export async function POST(req: NextRequest){
   chicken: ChickenProduct,
 };
 const category = entry.category
-await models[entry.category].insertOne(entry)*/
+await models[entry.category].insertOne(entry)
 return NextResponse.json({message:"SUCCESS"},{status:200})
   }catch(err){
   console.error(err)

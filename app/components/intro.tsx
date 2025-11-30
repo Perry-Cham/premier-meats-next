@@ -8,7 +8,7 @@ function Intro({title,message}: Props){
   return(
     <section>
       <h2 className="text-2xl font-bold">{title}</h2>
-      { !isValid ? <p>{message}</p> : message}
+      { !isValid ? <p className='text-lg'>{message}</p> : message}
     </section>
     )
 }

@@ -39,11 +39,17 @@ export async function POST(req: NextRequest) {
       })
 
       const buffer = Buffer.from(await imageFile.arrayBuffer())
+      const locations = {
+        beef: "/Product_Images/Beef",
+        pork: "/Product_Images/Pork",
+        processed: "/Product_Images/Processed_Meats",
+        chicken: "/Product_Images/Chicken",
+      }
       const folder = `/product images/${category}`
       const uploadRes = await imagekit.upload({
         file: buffer,
         fileName: imageFile.name,
-        folder,
+        folder:locations[category],
       })
 
       imageUrl = String(uploadRes?.url || "")

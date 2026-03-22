@@ -1,10 +1,10 @@
 # Premier Meats
 
-A mordern company website for Premier Meats (It's a demo website). Built with Next.js, TypeScript, and Tailwind CSS.
+A mordern company website for Yetu(It's a demo website). Built with Next.js, TypeScript, and Tailwind CSS.
 
 ## Project Overview
 
-Premier Meats is a Next.js 16 application that showcases a comprehensive meat product catalog including beef, pork, chicken, and processed meats. The platform uses MongoDB for product data management and provides a responsive user interface for both desktop and mobile users.
+Yetuis a Next.js 16 application that showcases a comprehensive meat product catalog including beef, pork, chicken, and processed meats. The platform uses MongoDB for product data management and provides a responsive user interface for both desktop and mobile users.
 
 ## Technologies Used
 

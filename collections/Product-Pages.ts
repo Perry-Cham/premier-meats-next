@@ -8,18 +8,23 @@ export const ProductPages: CollectionConfig = {
         defaultColumns: ['category'],
         group: 'Store',           // Optional: groups this collection in the sidebar
     },
+    access: {
+        read: () => true,
+    },
     fields: [
         {
             name: 'category',
             type: 'text',
             required: true,
-            index: true
+            index: true,
+            unique: true
         },
 
         {
             name: 'content',
             type: 'richText',
             required: true,
-        }
+        },
+
     ]
 }

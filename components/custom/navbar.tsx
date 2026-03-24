@@ -33,7 +33,7 @@ export default function AppNavbar(props: NavbarProps) {
         <NavbarStart>
           <div className="flex justify-start align-center">
           <img className="h-[30]" src="https://ik.imagekit.io/ypgvaedes/Images/Logo.png?updatedAt=1762952153806"/>
-          <h2 className="ml-2 self-center font-bold">Premier Meats</h2>
+          <h2 className="ml-2 self-center font-bold">Yetu Meats</h2>
           </div>
         </NavbarStart>
         <NavbarGap />

@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
-import Nav from '@/app/(app)/components/navbar'
-import Footer from '@/app/(app)/components/footer'
+import Nav from '@/components/custom/navbar'
+import Footer from '@/components/custom/footer'
 
 export default function RootLayout({
   children,

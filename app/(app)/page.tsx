@@ -333,7 +333,7 @@ export default function Home() {
           {/* hero copy — word-by-word entrance */}
           <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 pb-20 md:pb-28">
             <motion.p
-              className="section-label mb-6"
+              className="section-label text-gold-light mb-6"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...EASE, delay: 0.2 }}

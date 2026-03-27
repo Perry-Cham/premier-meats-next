@@ -78,7 +78,8 @@ export const Products: CollectionConfig = {
     // Optional: who can do what
     access: {
         read: () => true,                 // public can read products
-        create: ({ req }) => !!req.user,  // only logged-in admins
+        create: () => true,                 // public can read products
+       // create: ({ req }) => !!req.user,  // only logged-in admins
         update: ({ req }) => !!req.user,
         delete: ({ req }) => !!req.user,
     },

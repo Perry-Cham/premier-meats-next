@@ -9,6 +9,10 @@
 
 @config "../tailwind.config.js";
 
+@theme {
+  --light-gold:rgb(255 190 99);
+}
+
 @theme inline {
 
   --radius-sm: var(--radius-sm);

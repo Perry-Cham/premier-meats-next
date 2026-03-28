@@ -255,14 +255,14 @@ function FillButton({ href, children, outline = false }: { href: string; childre
     <motion.a
       href={href}
       className={`relative inline-flex items-center overflow-hidden border text-sm tracking-[0.2em] uppercase px-10 py-4 ${
-        outline ? "border-[#a87c3e]/50 text-[#a87c3e]" : "border-[#c41e2a] text-[#1c1917]"
+        outline ? "border-black text-[#1c1917]" : "border-[#c41e2a] text-[#1c1917]"
       }`}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       whileTap={{ scale: 0.97 }}
     >
       <motion.span
-        className={`absolute inset-0 ${outline ? "bg-[#a87c3e]/10" : "bg-[#c41e2a]"}`}
+        className={`absolute inset-0 ${outline ? "bg-[#a87c3e]/50" : "bg-[#c41e2a]"}`}
         initial={{ x: "-101%" }}
         animate={{ x: hovered ? "0%" : "-101%" }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -294,6 +294,7 @@ export default function Home() {
         .home-page { font-family:'Jost',sans-serif; background:#f7f4ef; color:#1c1917; }
         .serif { font-family:'Cormorant Garamond',serif; }
         .section-label { font-size:0.7rem; font-weight:500; letter-spacing:0.25em; text-transform:uppercase; color:#a87c3e; }
+        .section-label.light{color:rgb(255 190 99);}
         .red-rule::before { content:''; display:block; width:48px; height:2px; background:#c41e2a; margin-bottom:1rem; }
         .gold-divider { width:100%; height:1px; background:linear-gradient(90deg,transparent,#a87c3e40,transparent); }
 
@@ -318,14 +319,12 @@ export default function Home() {
           </motion.div>
 
           {/* spinning badge */}
-          <div className="absolute top-[20%] right-8 md:right-16 z-10 hidden md:flex flex-col items-center justify-center w-28 h-28 border border-[#a87c3e]/30 rounded-full bg-white/20 backdrop-blur-sm">
+          <div className="absolute top-[20%] right-8 md:right-16 z-10 hidden md:flex flex-col items-center justify-center w-30 h-30 border border-[#a87c3e]/30 rounded-full bg-white/80 backdrop-blur-sm">
             <div className="spin-slow absolute inset-0">
-              <svg viewBox="0 0 100 100" className="w-full h-full">
-                <defs><path id="ct" d="M 50,50 m -30,0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0"/></defs>
-                <text fontSize="9.5" fill="#a87c3e" letterSpacing="3">
-                  <textPath href="#ct">PREMIER MEATS · LUSAKA · ZAMBIA ·</textPath>
-                </text>
-              </svg>
+              <img
+              src="/api/media/file/IMG-20260325-WA0000_1_-removebg-preview.png"
+              className="object-cover"
+              />
             </div>
             <span className="serif text-2xl text-[#a87c3e] font-light">PM</span>
           </div>
@@ -333,7 +332,7 @@ export default function Home() {
           {/* hero copy — word-by-word entrance */}
           <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 pb-20 md:pb-28">
             <motion.p
-              className="section-label text-gold-light mb-6"
+              className="section-label light text-gold-light mb-6 text-gold-light"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ ...EASE, delay: 0.2 }}
@@ -344,7 +343,7 @@ export default function Home() {
             <h1 className="serif font-light leading-[0.9] mb-10">
               {[
                 { text: "Zambia's", delay: 0.3, color: "#1c1917" },
-                { text: "Finest",   delay: 0.45, color: "#a87c3e" },
+                { text: "Finest",   delay: 0.45, color: "rgb(255 190 99)" },
                 { text: "Meat.",    delay: 0.6,  color: "#1c1917" },
               ].map(({ text, delay, color }) => (
                 <div key={text} className="overflow-hidden">
@@ -498,7 +497,6 @@ export default function Home() {
                   Our <em className="text-[#a87c3e]">Products</em>
                 </h2>
               </div>
-              <FillButton href="/products/beef" outline>View All</FillButton>
             </div>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

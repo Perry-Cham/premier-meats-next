@@ -2,6 +2,8 @@ import Product_Page from "@/components/pages/product_page/product_page_shell";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 import { getPayload } from "payload";
 import config from "@payload-config";
+import { Suspense } from "react";
+import { LoaderCircle } from "lucide-react";
 
 interface Image {
   createdAt: string;
@@ -51,6 +53,7 @@ interface PageContent {
   products: Record<string, Product[]>;
 }
 export default  async function Page({ params }: { params: Promise<{ category: string }> }) {
+  "use cache"
   const payload = await getPayload({ config });
   const { category } = await params;
   const products_res = await payload.find({
@@ -87,5 +90,14 @@ export default  async function Page({ params }: { params: Promise<{ category: st
  
 
   const data = {content:content, products: processedProducts}
- return <Product_Page data={data}/>
+return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <LoaderCircle className="animate-spin" />
+        <p className="ml-3">Loading products...</p>
+      </div>
+    }>
+      <Product_Page data={data} />
+    </Suspense>
+  );
 }

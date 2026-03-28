@@ -130,7 +130,7 @@ export default function Product_Page({ data }: { data: PageContent }) {
     for (const [key, value] of Object.entries(data.products)) {
       console.log(data.products[key]);
       let p = totalProducts;
-      p += data[key].length;
+      p += data.products[key].length;
       setTotalProducts(p);
     }
 
@@ -309,7 +309,7 @@ export default function Product_Page({ data }: { data: PageContent }) {
           </section>
         </main>
       ) : (
-        <div className="min-h-screen flex items-center justify-center space-y-2">
+        <div className="min-h-screen flex items-center justify-center space-x-2 space-y-2 flex-col">
           <LoaderCircle className="animate-spin" />
           <p>Please wait as we get things ready for you</p>
         </div>

@@ -1,370 +1,188 @@
-# Premier Meats
+# Yetu Next.js Web Application
 
-A mordern company website for Yetu(It's a demo website). Built with Next.js, TypeScript, and Tailwind CSS.
+> **Disclaimer:** A Demo website for Yetu Meats. It is a an improvement over the initial Premier Meats static website located somewhere in my repositories. It uses Nextjs with PayloadCMS as a headless cms. 
 
-## Project Overview
+## Overview
 
-Yetuis a Next.js 16 application that showcases a comprehensive meat product catalog including beef, pork, chicken, and processed meats. The platform uses MongoDB for product data management and provides a responsive user interface for both desktop and mobile users.
+Yetu is a full-stack web application for a Zambian meat wholesale and retail company based in Lusaka. It uses Nextjs for the customer facing UI with MongoDB as the database and vercel blob for media storage. The project also supports other s3 solution via payload cms's s3 adapter which can be configured in payload.config.json
 
-## Technologies Used
+---
 
-- **Frontend Framework**: Next.js 16 (App Router)
-- **Language**: TypeScript 5.6
-- **Styling**: Tailwind CSS 4.1 with CSS Variables
-- **UI Components**: React Aria Components with custom shadcn/ui components
-- **Database**: MongoDB with Mongoose
-- **HTTP Client**: Axios
-- **Icons**: Heroicons, Lucide React
-- **Animation**: Framer Motion, Motion React
-- **Package Manager**: npm.
-- **State**: Zustand
+## Tech Stack
 
-## Project structure
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| CMS | Payload CMS 3.x |
+| Database | MongoDB (via Mongoose) |
+| Media Storage | Vercel Blob |
+| Authentication | Payload built-in auth |
+| Styling | Tailwind CSS |
+| Animation | Framer Motion (`motion/react`) |
+| UI Components | React Aria Components, shadcn/ui |
+| Rich Text | Lexical (via `@payloadcms/richtext-lexical`) |
+| Deployment | Vercel |
 
-Top-level layout (matching the workspace):
-
-```
-.
-├── .env.local
-├── .git/
-├── .next/
-├── app/
-├── components/
-│   └── ui/                 # shadcn/ui reusable UI primitives
-├── hooks/
-├── lib/
-├── models/
-├── public/
-├── stores/
-├── styles/
-├── types/
-├── components.json
-├── eslint.config.mjs
-├── next.config.js
-├── postcss.config.js
-├── package.json
-├── tailwind.config.js
-├── tsconfig.json
-└── README.md
-
-```
-
-app/ (app-router) — important pages & API routes
-
-```
-app/
-├── layout.tsx
-├── page.tsx
-├── (AUTHENTICATION)/
-│   ├── signin/page.tsx
-│   └── signup/page.tsx
-├── about/page.tsx
-├── contact/page.tsx
-├── admin/
-│   ├── page.tsx
-│   └── [category]/page.tsx
-├── products/
-│   ├── beef/page.tsx
-│   ├── chicken/page.tsx
-│   ├── pork/page.tsx
-│   └── processed/page.tsx
-├── components/
-│   ├── admin/
-│   │   ├── AdminProductsClient.tsx
-│   │   ├── AdminProductModal.tsx
-│   │   └── AdminProductCard.tsx
-│   ├── card.tsx
-│   ├── display.tsx
-│   ├── footer.tsx
-│   ├── intro.tsx
-│   ├── navbar.tsx
-│   ├── overlay_card.tsx
-│   ├── product_card.tsx
-│   ├── product_display.tsx
-│   └── sign_in_card.tsx
-└── api/
-   ├── (GET)/
-   │   └── getproducts/[name]/route.ts
-   ├── (POST)/
-   │   ├── createUser/route.ts
-   │   └── newproduct/route.ts
-   ├── (PATCH)/
-   │   └── editproduct/route.ts
-   ├── (DELETE)/
-   │   └── deleteproduct/[category]/[id]/route.ts
-   └── auth/
-      └── [...nextauth]/route.ts
-
-```
-
-Other key folders
-
-```
-components/ui/              # shared UI primitives (shadcn)
-hooks/                      # custom hooks (use-media-query.ts)
-lib/                        # utilities & db connection (db.ts, utils.ts)
-models/                     # mongoose models (product-models.ts, user-model.ts)
-public/                     # static assets
-stores/                     # client stores (navStore.tsx)
-styles/                     # global stylesheet (globals.css)
-types/                      # project types
-```
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ and npm
-- MongoDB database connection
+- Node.js 18.x or later
+- pnpm (recommended) or npm
+- A MongoDB database (MongoDB Atlas free tier works fine)
+- A Vercel account with Blob storage enabled
+- A Payload secret (any random string)
+
+### Environment Variables
+
+Create a `.env.local` file in the project root with the following:
+
+```env
+# MongoDB
+DATABASE_URL=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/<dbname>
+
+# Payload CMS
+PAYLOAD_SECRET=your-random-secret-string-here
+
+# Vercel Blob
+BLOB_READ_WRITE_TOKEN=vercel_blob_rw_...
+
+# App URL (used by Payload for media URLs and CORS)
+NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+
+# Contact form (Web3Forms)
+WEB3_API_KEY=your-web3forms-key (Used for the contact form)
+```
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Perry-Cham/premier-meats-next.git
-   cd premier-meats-next
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Configure environment variables**
-   
-   Create a `.env.local` file in the project root:
-   ```env
-   MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database-name
-   NODE_URL=http://localhost:3000
-   # ImageKit (required for product image uploads)
-   IMAGEKIT_PUBLIC_KEY=your_public_key
-   IMAGEKIT_PRIVATE_KEY=your_private_key
-   IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id
-   ```
-  **NOTE**: 
-- Make sure you have a valid mongoDB atlas account to obtain a connection string. create one for free at [mongoDB.com](https://mongodb.com)
-- NODE_URL refers to the current domain the project is running under. It is used for backend request in the serrver componentd
-
-4. **Run the development server**
-   ```bash
-   npm run dev
-   ```
-
-   Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
-
-## Development Setup
-
-### Local Development Environment
-
-The project uses modern development tools to ensure code quality and consistency:
-
-- **TypeScript**: Strict type checking enabled for safer code
-- **ESLint**: Code linting with Next.js, React, and TypeScript plugins
-- **Prettier**: Code formatting for consistent style
-- **Turbopack**: Fast bundling during development
-
-### Available Scripts
-
 ```bash
-# Start development server with Turbopack
-npm run dev
+# Install dependencies
+pnpm install
 
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-# Run ESLint and fix issues
-npm run lint
-```
-## Breakdown of Environment Variables
-MONGO_URI               : Your mongodb atlas uri, can be replaced with other database as needed but will require you to rewrite the api rutes
-NODE_URL                : The domain of the website, used by axios in server components since it requires absolute paths 
-**Example Usage**
-``
-axios.post(`${process.env.NODE_URL}/editproduct`, data)
-``
-IMAGEKIT_PUBLIC_KEY     : Required for Imagekit SDK, used to upload and delete images
-IMAGEKIT_PRIVATE_KEY    : Required for Imagekit SDK, used to upload and delete images
-IMAGEKIT_URL_ENDPOINT   : Required for Imagekit SDK, used to upload and delete images
-ENVIRONMENT             : Specifies whether the project is running in a production environment, used for logging items to the console
-NEXTAUTH_SECRET         : Used by next-auth to sign jwt tokens, required in production
-
-## Coding Standards
-
-### TypeScript
-
-- Strict mode is enabled in `tsconfig.json`
-- All new code should use TypeScript with explicit type annotations
-- Import paths use the `@/` alias defined in `tsconfig.json`
-
-### Component Organization
-
-- Components are organized by feature in the `app/components/` directory
-- UI components use shadcn/ui patterns with React Aria Components
-- Props interfaces are defined as `Props` and placed above components
-
-### Styling
-
-- Use Tailwind CSS utility classes for all styling
-- CSS variables defined in `styles/globals.css` for theme consistency
-
-### Code Quality
-
-ESLint rules enforce:
-- Unused imports detection and removal
-- Proper import ordering (type, builtin, external, internal, etc.)
-- React best practices and hooks rules
-- Accessibility standards (jsx-a11y)
-
-## Deployment Setup
-
-### Production Build
-
-1. **Build the application**
-   ```bash
-   npm run build
-   ```
-
-2. **Start the production server**
-   ```bash
-   npm start
-   ```
-
-### Database Configuration
-
-Ensure your MongoDB connection string is properly set in environment variables:
-
-```env
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database-name
+# Run the development server
+pnpm dev
 ```
 
-The application connects to MongoDB using Mongoose. Product collections include: Beef, Pork, Chicken, and Processed.
+The app will be available at `http://localhost:3000`.
+The Payload admin panel will be available at `http://localhost:3000/admin`.
 
-### Vercel Deployment
+### First-time Setup
 
-The project includes Vercel configuration for seamless deployment:
+When you first run the project with a fresh database, navigate to `http://localhost:3000/admin` and Payload will prompt you to create the first admin user. This user gets full access to the CMS.
 
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Set environment variables in Vercel dashboard
-4. Vercel will automatically build and deploy on every push
+---
 
-## AUTHENTICATION 
-The project uses Authjs with JWT for the authentication of admin users. 
+## Payload CMS Collections
 
-## API
+### `users`
+Manages admin users. Authentication is handled entirely by Payload — login, logout, password hashing, and JWT sessions are built in. 
 
-### Get Products by Category
+### `media`
+Handles all image uploads. Files are stored in Vercel Blob. The collection is configured with Sharp for automatic image resizing on upload (thumbnail and card sizes generated automatically).
 
-**Endpoint**: `GET /api/getproducts/[category]`
+### `products`
+The core product catalogue. A single unified collection replaces the four separate MongoDB collections (`Beef`, `Pork`, `Chicken`, `Processed`) from the legacy system. Products are filtered by a `category` select field rather than by collection name.
 
-**Parameters**:
-- `category` (string): Product category (beef, pork, chicken, processed)
+Key fields:
+- `name` — product name
+- `category` — select: `beef` | `pork` | `chicken` | `processed`
+- `subcategory` — text, used for grouping within a category page
+- `price` — number
+- `image` — upload relationship to the Media collection
+- `weight` — optional text (e.g. `"400–500g"`)
+- `badge` — optional text (e.g. `"Prime"`, `"Slow Cook"`)
 
-**Response**:
-```json
-[
-  {
-    "_id": "507f1f77bcf86cd799439011",
-    "name": "T-Bone Steak",
-    "price": 45.99,
-    "image": "https://example.com/image.jpg",
-    "subcategory": "Steaks"
-  }
-]
+### `product-pages`
+Stores the rich text intro content for each product category page (the descriptive paragraphs shown above the product grid). Uses Lexical rich text. One document per category, identified by a `category` field.
+
+To render this content on the frontend, fetch the document and pass the `content` field to `<RichText>` from `@payloadcms/richtext-lexical/react`:
+
+```tsx
+import { RichText } from '@payloadcms/richtext-lexical/react'
+
+// data.content is the Lexical state object — pass it directly
+<RichText data={doc.content} />
 ```
 
-**Error Response** (400):
-```json
-{
-  "error": "Invalid product type"
-}
+---
+
+## Media Storage
+
+All images are stored in Vercel Blob via the `@payloadcms/storage-vercel-blob` plugin. The plugin intercepts Payload's upload handling and redirects files to Blob storage, returning a public URL that gets saved to the database.
+Currently it uploads to vercel blob by default but I'll implement a system that saves images locally based on dev environment in the near future.
+
+---
+
+## Collections
+
+The project contains collections under the /app/(app)/collections for Payloads CMS. Each collection defines a schema for the data it expects. There are currently four collections. 
+- Users: 
+- Media: Defines the shape of data expected during Image uploads
+- Products: Defines the shape of products
+- Productpages: Defines the shape of product page content. 
+
+## API Routes
+
+Payload provides an auto generated rest api for accessing the data defined in the collections directory auto-generated REST API at `/api/products`, `/api/media`, and `/api/users`.
+
+---
+
+## Frontend Pages
+
+| Route | Description |
+|---|---|
+| `/` | Homepage — hero, who we are, stats, pillars, products overview, CTA |
+| `/about` | About page — company profile, farm-to-plate story, team, values |
+| `/products/[category]` | Product Page - A dynamic route that fetches products based on the category parameter passed by the url
+| `/contact` | Contact form (Web3Forms), bank details, addresses |
+
+---
+
+## Animation
+
+All page animations use Framer Motion (`motion/react`)
+
+- **Scroll reveals** — `useInView` with `once: true` triggers fade + translate entrance when elements enter the viewport.
+- **Parallax** — `useScroll` + `useTransform` + `useSpring` on image sections. The spring adds physical lag so images drag behind scroll rather than tracking it exactly.
+- **Hero entrance** — word-by-word staggered `y: "110%" → 0` reveal using `overflow-hidden` clip containers.
+- **Hover springs** — `whileHover` with spring transition on cards, buttons, and interactive elements.
+- **Fill buttons** — animated `x: "-101%" → "0%"` background span inside `overflow-hidden` anchor for the sliding fill effect.
+- **Ticker** — CSS `@keyframes` only. A uniform infinite `translateX` loop needs no spring physics or DOM measurement, so plain CSS is the right tool.
+
+---
+
+## Deployment
+
+The project is deployed on Vercel. The following environment variables must be set in the Vercel project dashboard:
+
 ```
-## POST ROUTES 
-
-**NOTE**: User app privelages are decided by authentication level. All new users start with authentication level 0 meaning that they cannot edit prices and or grant other users elevated privelages. Only the Admin user with authentication level 2 can grant elevated privalages to other users. At least authentication level 1 is required to make changes to the product catalogue.
-
-**/api/createUser**
-This route takes in an email, name and password stringbto create a new user with authentication level 0 
-
-**/api/newproduct** 
-This route receives is used by users with admin authentication level 1 to create new products of the schema 
-```
-{
-name:string,
-price:number,
-image:string,
-subcategory:string
-}
+DATABASE_URL
+PAYLOAD_SECRET
+BLOB_READ_WRITE_TOKEN
+NEXT_PUBLIC_SERVER_URL
+WEB3_API_KEY
 ```
 
-**/api/editproduct**
-Allows users of authentication level 1 to edit product details within the database
+Vercel Blob storage is provisioned from the Vercel dashboard under the Storage tab. Once provisioned, `BLOB_READ_WRITE_TOKEN` is added to the project automatically.
 
-### How image uploads work
+---
 
-- `POST /api/newproduct` expects multipart/form-data and requires an `imageFile` field for new products.
-- The server uploads the file to ImageKit under `/product images/[category]` and stores the returned URL in the product document.
-- `PUT /api/editproduct` accepts multipart/form-data and will upload a provided `imageFile` and update the product image URL if you send one.
+## Current Issues
+- Lightened up gold on the landing page by using lighter colours
+- Fix the product page so that it accurately sets totalProducts state to the number of products in that category on mount
+- Make the navbar get product hcategories from the backend rather than hardcoding them
+- Add ISR to the products page to optimize performance and reduce database hits.
+- Update the images to use the nextjs image component to optimize load times
+- Export metadata from landing and about pages to improve SEO
+- Fix infinite loading screen on products Page
+- Add a separate directory for typescript types
+- Remove redundant shadcn copmponents
 
-### Manual test checklist (admin flows)
+---
 
-1. Start dev server with ImageKit env vars set and a working MongoDB connection.
-2. Open the admin view for a category (e.g., `/admin/beef`).
-3. Create a new product using the "Create new product" modal and supply an image file. Verify the image uploads and appears under ImageKit in `/product images/<category>`.
-4. Edit an existing product and change the name/price/subcategory — save and verify the database record updates and the UI refreshes.
-5. Edit a product and upload a new image file — verify ImageKit receives the file and the DB image URL updates.
-6. Delete a product (from the card or the edit modal) — verify the DB record is removed and the UI refreshes.
+## Licence
 
-## Admin API / admin panel endpoints (overview)
-
-The admin UI uses three server endpoints to manage products. All endpoints for modifying products expect an admin-level user 
-
-1) POST /api/newproduct — create new product
-   - Request type: multipart/form-data
-   - Required fields (form data):
-      - category (beef|chicken|pork|processed)
-      - name (string)
-      - price (number)
-      - subcategory (string)
-      - imageFile (file) — image file is required for creating new products
-   - Behavior: server uploads imageFile to ImageKit under the folder `/Product Images/<category>` and saves the returned image URL into the product document before inserting into the database.
-  
-
-2) PUT /api/editproduct — edit existing product
-   - Request type: multipart/form-data
-   - Expected fields (form data):
-      - id (string) — product _id
-      - category (string)
-      - name (string)
-      - price (number)
-      - subcategory (string)
-      - image (string) — optional image URL (if you want to keep an existing URL)
-      - imageFile (file) — optional file to upload which replaces the image
-   - Behavior: if an imageFile is included, the server uploads it to ImageKit under `/product images/<category>` and replaces the stored image URL for that product. Non-empty fields will be updated for the product.
-  
-
-3) DELETE /api/deleteproduct/:category/:id — delete product
-   - Request type: HTTP DELETE
-   - Path params:
-      - category (beef|chicken|pork|processed)
-      - id — product _id
-   - Behavior: deletes the product from the matching collection. If the product had an uploaded image the API will attempt to remove the file from ImageKit (it uses the stored file id). Any ImageKit deletion failures are logged and the product delete will still proceed.
-
-
-Notes & recommendations
-- Use folder names without spaces for predictable paths (we currently use `/product images/<category>`). Using kebab-case `/product-images/<category>` is recommended to avoid accidental encoding issues.
-- The server expects form-data for both new and edit operations so forms can pass files and textual fields together.
-
-
-## Key Features
-
-- **Product Catalog**: Browse beef, pork, chicken, and processed meat products
-- **Responsive Design**: Fully responsive on desktop, tablet, and mobile devices
-- **Contact Form**: Integrated contact form using Web3Forms API
-- **Company Information**: About page with business details and management team
-- **Modern UI**: Built with React Aria Components for accessibility
-- **Admin Panel**: For managing product listings
-
+This project is unlicensed and intended for personal/hobby use only. All business content, branding, and copy belongs to Premier Meats, Lusaka, Zambia.

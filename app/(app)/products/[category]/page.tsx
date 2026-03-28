@@ -75,6 +75,7 @@ export default  async function Page({ params }: { params: Promise<{ category: st
       },
     },
   }); 
+
  const content = content_res.docs[0] as HeroText;
   let processedProducts = products.reduce((acc, item) => {
     item.imagesrc = item.images[0].image.url;

@@ -53,11 +53,7 @@ export const Products: CollectionConfig = {
                     type: 'upload',
                     relationTo: 'media',  
                     required: true,
-                },
-                {
-                    name: 'alt',
-                    type: 'text',
-                },
+                }
             ],
             maxRows: 10,
         },

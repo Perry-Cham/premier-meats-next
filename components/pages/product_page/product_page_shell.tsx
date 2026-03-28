@@ -121,18 +121,22 @@ interface PageContent {
 export default function Product_Page({ data }: { data: PageContent }) {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [content, setContent] = useState<PageContent | null>(null);
-  const [filtered, setFiltered] = useState<Record<string, Product[]> | null>(null);
+  const [filtered, setFiltered] = useState<Record<string, Product[]> | null>(
+    null,
+  );
   const [totalProducts, setTotalProducts] = useState(0);
   const params = useParams<{ category: string }>();
 
   useEffect(() => {
     //Set Content to data
+    let p = totalProducts;
     for (const [key, value] of Object.entries(data.products)) {
-      console.log(data.products[key]);
-      let p = totalProducts;
+      console.log(data.products[key], data.products[key].length);
+      
+      console.log(p);
       p += data.products[key].length;
-      setTotalProducts(p);
     }
+    setTotalProducts(p);
 
     console.log(data);
     setContent(data);
@@ -309,9 +313,8 @@ export default function Product_Page({ data }: { data: PageContent }) {
           </section>
         </main>
       ) : (
-        <div className="min-h-screen flex items-center justify-center space-x-2 space-y-2 flex-col">
-          <LoaderCircle className="animate-spin" />
-          <p>Please wait as we get things ready for you</p>
+        <div className="min-h-screen items-center justify-center space-y-2">
+          
         </div>
       )}
 

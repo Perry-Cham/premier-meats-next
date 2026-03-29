@@ -10,7 +10,6 @@ export default function FilterBar({
   active: string | null;
   onSelect: (s: string | null) => void;
 }) {
-  console.log(subcategories);
   return (
     <div className="sticky top-0 z-30 bg-[#f7f4ef]/95 backdrop-blur-sm border-b border-[#e8e2d9]">
       <div className="max-w-6xl mx-auto px-6 md:px-12 py-3 flex gap-2 overflow-x-auto scrollbar-none">

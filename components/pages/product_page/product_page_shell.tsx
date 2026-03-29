@@ -120,32 +120,29 @@ interface PageContent {
 
 export default function Product_Page({ data }: { data: PageContent }) {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
-  const [content, setContent] = useState<PageContent | null>(null);
   const [filtered, setFiltered] = useState<Record<string, Product[]> | null>(null);
   const [totalProducts, setTotalProducts] = useState(0);
-  const params = useParams<{ category: string }>();
+
+  // Get the page content from data 
+  const {content, products} = data;
+
 
   useEffect(() => {
     //Set Content to data
     for (const [key, value] of Object.entries(data.products)) {
-      console.log(data.products[key]);
       let p = totalProducts;
-      p += data.products[key].length;
+      p += products[key].length;
       setTotalProducts(p);
     }
-
-    console.log(data);
-    setContent(data);
-    setFiltered(data.products);
   }, []);
 
   // Filter products by the selected subcategory
   useEffect(() => {
     if (activeFilter === null && content) {
-      setFiltered(content.products);
+      setFiltered(data.products);
     } else if (activeFilter) {
       const filtered = {
-        [activeFilter]: content.products[activeFilter] || [],
+        [activeFilter]: data.products[activeFilter] || [],
       };
       setFiltered(filtered);
     }
@@ -181,7 +178,7 @@ export default function Product_Page({ data }: { data: PageContent }) {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ ...EASE, delay: 0.2 }}
                 >
-                  Our <span className="capitalize">{params.category}</span>
+                  Our <span className="capitalize">{data.content.category}</span>
                 </motion.h1>
               </div>
 
@@ -192,7 +189,7 @@ export default function Product_Page({ data }: { data: PageContent }) {
                 transition={{ ...EASE, delay: 0.45 }}
               >
                 <RichText
-                  data={content.content.content}
+                  data={content.content}
                   className="text-[#78716c] leading-relaxed mb-2 text"
                 />
               </motion.div>
@@ -207,7 +204,7 @@ export default function Product_Page({ data }: { data: PageContent }) {
                 {[
                   { value: `${totalProducts}`, label: "Products" },
                   {
-                    value: `${Object.keys(content.products).length}`,
+                    value: `${Object.keys(products).length}`,
                     label: "Categories",
                   },
                   { value: "Daily", label: "Restocked" },
@@ -227,7 +224,7 @@ export default function Product_Page({ data }: { data: PageContent }) {
 
           {/* ── FILTER BAR ── */}
           <FilterBar
-            subcategories={Object.keys(content.products)}
+            subcategories={Object.keys(products)}
             active={activeFilter}
             onSelect={setActiveFilter}
           />

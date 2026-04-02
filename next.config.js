@@ -1,7 +1,7 @@
 const { withPayload } = require("@payloadcms/next/withPayload");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    cacheComponents:true
+   // cacheComponents:true
 };
 
 module.exports = withPayload(nextConfig);

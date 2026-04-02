@@ -8,6 +8,7 @@ import {
 } from "motion/react";
 import { useRef, useState, useEffect } from "react";
 import { TrendingUp, HandCoins, Target } from "lucide-react";
+import { Reveal } from "@/components/pages/about_page_components/about_page_components";
 
 /* ─────────────────────────────────────────────────────────
    COLOUR TOKENS  (light scheme)
@@ -23,43 +24,6 @@ import { TrendingUp, HandCoins, Target } from "lucide-react";
 const SPRING = { type: "spring", stiffness: 60, damping: 18 } as const;
 const EASE   = { duration: 0.7, ease: [0.16, 1, 0.3, 1] } as const;
 
-/* ────────────────────────────────────────────────────────
-   Scroll-triggered reveal
-   Mechanism: useInView detects when the element enters the
-   viewport (with a -80px margin so it fires slightly before
-   fully visible). Framer then animates from the hidden
-   initial state to the visible animate state. `once:true`
-   means it never re-animates on scroll back up.
-──────────────────────────────────────────────────────── */
-function Reveal({
-  children, delay = 0, direction = "up", className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  direction?: "up" | "left" | "right" | "none";
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  const hidden = {
-    opacity: 0,
-    y: direction === "up" ? 40 : 0,
-    x: direction === "left" ? -40 : direction === "right" ? 40 : 0,
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={hidden}
-      animate={inView ? { opacity: 1, y: 0, x: 0 } : hidden}
-      transition={{ ...EASE, delay: delay / 1000 }}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 /* ────────────────────────────────────────────────────────
    Parallax image
@@ -288,23 +252,6 @@ export default function Home() {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
-
-        .home-page { font-family:'Jost',sans-serif; background:#f7f4ef; color:#1c1917; }
-        .serif { font-family:'Cormorant Garamond',serif; }
-        .section-label { font-size:0.7rem; font-weight:500; letter-spacing:0.25em; text-transform:uppercase; color:#a87c3e; }
-        .section-label.light{color:rgb(255 190 99);}
-        .red-rule::before { content:''; display:block; width:48px; height:2px; background:#c41e2a; margin-bottom:1rem; }
-        .gold-divider { width:100%; height:1px; background:linear-gradient(90deg,transparent,#a87c3e40,transparent); }
-
-        @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-33.333%)} }
-        .ticker-track { animation:ticker 28s linear infinite; }
-
-        @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-        .spin-slow { animation:spin-slow 20s linear infinite; }
-      `}</style>
-
       <main className="home-page">
 
         {/* ── HERO ── */}

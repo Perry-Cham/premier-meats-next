@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap");
 
 @plugin "tailwindcss-animate";
 
@@ -8,13 +9,121 @@
 @custom-variant dark (&:is(.dark *));
 
 @config "../tailwind.config.js";
+/* ========= CUSTOM STYLES ========= */
+/* LANDING PAGE STYLES */
+.home-page {
+  font-family: "Jost", sans-serif;
+  background: #f7f4ef;
+  color: #1c1917;
+}
+.serif {
+  font-family: "Cormorant Garamond", serif;
+}
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #a87c3e;
+}
+.section-label.light {
+  color: rgb(255 190 99);
+}
+.red-rule::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: #c41e2a;
+  margin-bottom: 1rem;
+}
+.gold-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #a87c3e40, transparent);
+}
 
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-33.333%);
+  }
+}
+.ticker-track {
+  animation: ticker 28s linear infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* PRODUCT PAGE STYLES */
+.beef-page {
+  font-family: "Jost", sans-serif;
+  background: #f7f4ef;
+  color: #1c1917;
+}
+.serif {
+  font-family: "Cormorant Garamond", serif;
+}
+
+.gold-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #a87c3e40, transparent);
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ABOUT PAGE STYLES */
+.about-page {
+  font-family: "Jost", sans-serif;
+  background: #f7f4ef;
+  color: #1c1917;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #a87c3e;
+}
+.red-rule::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 2px;
+  background: #c41e2a;
+  margin-bottom: 1rem;
+}
+/*======= TAILWIND STYLES ====== */
 @theme {
-  --light-gold:rgb(255 190 99);
+  --light-gold: rgb(255 190 99);
 }
 
 @theme inline {
-
   --radius-sm: var(--radius-sm);
 
   --radius-md: var(--radius-md);
@@ -85,9 +194,13 @@
 
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-  --font-mono: "Geist Mono", 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace';
+  --font-mono:
+    "Geist Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco",
+    "Consolas", '"Liberation Mono"', '"Courier New"', "monospace";
 
   --font-sans--font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 
@@ -161,7 +274,6 @@
 }
 
 :root {
-
   --radius: 0.625rem;
 
   --card: oklch(1 0 0);
@@ -302,7 +414,6 @@
 }
 
 .dark {
-
   --background: oklch(0.145 0 0);
 
   --foreground: oklch(0.985 0 0);
@@ -333,9 +444,9 @@
 
   --destructive: oklch(0.704 0.191 22.216);
 
-  --border: oklch(0.270 0.013 285.805);
+  --border: oklch(0.27 0.013 285.805);
 
-  --input: oklch(0.320 0.013 285.805);
+  --input: oklch(0.32 0.013 285.805);
 
   --ring: oklch(0.546 0.245 262.881);
 
@@ -377,7 +488,7 @@
 
   --secondary-fg: oklch(0.985 0 0);
 
-  --overlay: oklch(0.210 0.006 285.885);
+  --overlay: oklch(0.21 0.006 285.885);
 
   --overlay-fg: oklch(0.985 0 0);
 
@@ -413,7 +524,7 @@
 
   --danger-subtle-fg: oklch(0.704 0.191 22.216);
 
-  --navbar: oklch(0.190 0.006 285.885);
+  --navbar: oklch(0.19 0.006 285.885);
 
   --navbar-fg: oklch(0.985 0 0);
 
@@ -435,7 +546,11 @@
     background-color: var(--bg);
     color: var(--fg);
   }
-  *, ::after, ::before, ::backdrop, ::file-selector-button {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
     border-color: var(--border, currentColor);
   }
   html {
@@ -456,7 +571,7 @@
 }
 
 @utility touch-target {
-    position: relative;
+  position: relative;
   &::before {
     content: "";
     position: absolute;

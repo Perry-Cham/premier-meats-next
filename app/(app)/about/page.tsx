@@ -6,10 +6,11 @@ import {
   useSpring,
   useInView,
 } from "motion/react";
+import { Reveal, ParallaxImage, Pill, ResponsibilityCard, QualityCard } from "@/components/pages/about_page_components/about_page_components"
 import { useRef } from "react";
 
 /* ─────────────────────────────────────────────────────────
-   IMAGE SLOTS — swap these src strings with your own URLs
+   IMAGE SLOTS
 ───────────────────────────────────────────────────────── */
 const IMAGES = {
   // Hero — cattle on Zambian farmland / wide pastoral shot
@@ -37,109 +38,6 @@ const IMAGES = {
 const EASE   = { duration: 0.75, ease: [0.16, 1, 0.3, 1] } as const;
 const SPRING = { type: "spring", stiffness: 55, damping: 18 } as const;
 
-/* ─────────────────────────────────────────────────────────
-   SHARED COMPONENTS
-───────────────────────────────────────────────────────── */
-function Reveal({
-  children, delay = 0, direction = "up", className = "",
-}: {
-  children: React.ReactNode; delay?: number;
-  direction?: "up" | "left" | "right" | "none"; className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-70px" });
-  const hidden = {
-    opacity: 0,
-    y: direction === "up" ? 40 : 0,
-    x: direction === "left" ? -40 : direction === "right" ? 40 : 0,
-  };
-  return (
-    <motion.div ref={ref} className={className}
-      initial={hidden}
-      animate={inView ? { opacity: 1, y: 0, x: 0 } : hidden}
-      transition={{ ...EASE, delay: delay / 1000 }}>
-      {children}
-    </motion.div>
-  );
-}
-
-function ParallaxImage({
-  src, alt, strength = 55, className = "", aspectClass = "aspect-[4/3]",
-}: {
-  src: string; alt: string; strength?: number; className?: string; aspectClass?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const rawY = useTransform(scrollYProgress, [0, 1], [-strength, strength]);
-  const y = useSpring(rawY, { stiffness: 80, damping: 20 });
-  return (
-    <div ref={ref} className={`overflow-hidden ${aspectClass} ${className}`}>
-      <motion.img src={src} alt={alt} style={{ y, scale: 1.15 }} className="w-full h-full object-cover" />
-    </div>
-  );
-}
-
-/* ── Staggered pill ── */
-function Pill({ label, index, accent = false }: { label: string; index: number; accent?: boolean }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-40px" });
-  return (
-    <motion.div ref={ref}
-      initial={{ opacity: 0, y: 14 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ ...EASE, delay: index * 0.07 }}
-      className={`flex items-center gap-3 border rounded-sm px-5 py-3 transition-colors duration-300 cursor-default ${
-        accent
-          ? "border-[#c41e2a]/25 bg-white hover:border-[#c41e2a] hover:bg-[#fff8f8]"
-          : "border-[#a87c3e]/25 bg-white hover:border-[#a87c3e] hover:bg-[#fdfaf6]"
-      }`}>
-      <span className={`text-base ${accent ? "text-[#c41e2a]" : "text-[#a87c3e]"}`}>✦</span>
-      <span className="text-[#1c1917] text-sm tracking-wide">{label}</span>
-    </motion.div>
-  );
-}
-
-/* ── Responsibility card ── */
-function ResponsibilityCard({
-  to, body, index,
-}: { to: string; body: string; index: number }) {
-  return (
-    <Reveal direction="up" delay={index * 120}>
-      <motion.div
-        className="bg-white border border-[#e8e2d9] rounded-sm p-7 h-full"
-        whileHover={{ y: -4, boxShadow: "0 16px 40px rgba(28,25,23,0.09)" }}
-        transition={SPRING}
-      >
-        <div className="w-8 h-0.5 bg-[#c41e2a] mb-5" />
-        <p className="text-[0.65rem] tracking-[0.22em] uppercase text-[#a87c3e] mb-3">To the {to}</p>
-        <p className="text-[#78716c] text-sm leading-relaxed">{body}</p>
-      </motion.div>
-    </Reveal>
-  );
-}
-
-/* ── Quality objective card ── */
-function QualityCard({ body, num, index }: { body: string; num: string; index: number }) {
-  return (
-    <Reveal direction="up" delay={index * 100}>
-      <motion.div
-        className="relative bg-white border border-[#e8e2d9] rounded-sm p-7 overflow-hidden"
-        whileHover={{ borderColor: "#c41e2a", backgroundColor: "#fff8f8" }}
-        transition={{ duration: 0.25 }}
-      >
-        <motion.div
-          className="serif text-6xl font-light leading-none mb-5"
-          style={{ color: "rgba(196,30,42,0.10)" }}
-          whileHover={{ color: "rgba(196,30,42,0.30)" }}
-          transition={{ duration: 0.25 }}
-        >
-          {num}
-        </motion.div>
-        <p className="text-[#1c1917] text-sm leading-relaxed font-medium">{body}</p>
-      </motion.div>
-    </Reveal>
-  );
-}
 
 /* ─────────────────────────────────────────────────────────
    PAGE
@@ -155,17 +53,6 @@ export default function About() {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
-        .about-page  { font-family:'Jost',sans-serif; background:#f7f4ef; color:#1c1917; }
-        .serif       { font-family:'Cormorant Garamond',serif; }
-        .section-label { font-size:.7rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;color:#a87c3e; }
-        .red-rule::before { content:'';display:block;width:48px;height:2px;background:#c41e2a;margin-bottom:1rem; }
-        .gold-divider { width:100%;height:1px;background:linear-gradient(90deg,transparent,#a87c3e40,transparent); }
-        @keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-        .spin-slow { animation:spin-slow 20s linear infinite; }
-      `}</style>
-
       <main className="about-page">
 
         {/* ══════════════════════════════════════
@@ -184,11 +71,11 @@ export default function About() {
               <svg viewBox="0 0 100 100" className="w-full h-full">
                 <defs><path id="qsc" d="M 50,50 m -30,0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0"/></defs>
                 <text fontSize="9" fill="#a87c3e" letterSpacing="2.5">
-                  <textPath href="#qsc">Yetu · EST. 2025 · NDOLA ·</textPath>
+                  <textPath href="#qsc">Yetu · EST. 2025 · Lusaka ·</textPath>
                 </text>
               </svg>
             </div>
-            <span className="serif text-2xl text-[#a87c3e] font-light italic">QS</span>
+            <span className="serif text-2xl text-[#a87c3e] font-light italic">YT</span>
           </div>
 
           <div className="relative z-10 max-w-6xl mx-auto w-full px-6 md:px-12 pb-16 md:pb-20">

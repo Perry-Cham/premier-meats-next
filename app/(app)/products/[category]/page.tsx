@@ -52,8 +52,12 @@ interface PageContent {
   content: HeroText;
   products: Record<string, Product[]>;
 }
-export default  async function Page({ params }: { params: Promise<{ category: string }> }) {
-  "use cache"
+async function Shell({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) {
+  "use cache";
   const payload = await getPayload({ config });
   const { category } = await params;
   const products_res = await payload.find({
@@ -64,19 +68,19 @@ export default  async function Page({ params }: { params: Promise<{ category: st
       },
     },
   });
-  
- const products = products_res.docs as Product[];
 
- const content_res = await payload.find({
+  const products = products_res.docs as Product[];
+
+  const content_res = await payload.find({
     collection: "productpage",
     where: {
       category: {
         equals: category,
       },
     },
-  }); 
+  });
 
- const content = content_res.docs[0] as HeroText;
+  const content = content_res.docs[0] as HeroText;
   let processedProducts = products.reduce((acc, item) => {
     item.imagesrc = item.images[0].image.url;
     if (!acc[item.subcategory]) {
@@ -86,19 +90,28 @@ export default  async function Page({ params }: { params: Promise<{ category: st
       acc[item.subcategory].push(item);
     }
     return acc;
-  }, {});
+  }, {} as Record<string, any>);
 
- 
+  const data = { content: content, products: processedProducts };
+  return <Product_Page data={data} />;
+}
 
-  const data = {content:content, products: processedProducts}
-return (
-    <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center">
-        <LoaderCircle className="animate-spin" />
-        <p className="ml-3">Loading products...</p>
-      </div>
-    }>
-      <Product_Page data={data} />
+export default function Page({
+  params,
+}: {
+  params: Promise<{ category: string }>;
+}) {
+  
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <LoaderCircle className="animate-spin" />
+          <p className="ml-3">Loading products...</p>
+        </div>
+      }
+    >
+      <Shell params={params} />
     </Suspense>
   );
 }

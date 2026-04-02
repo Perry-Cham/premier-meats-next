@@ -157,17 +157,6 @@ export default function Product_Page({ data }: { data: PageContent }) {
 
   return (
     <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
-        .beef-page { font-family:'Jost',sans-serif; background:#f7f4ef; color:#1c1917; }
-        .serif { font-family:'Cormorant Garamond',serif; }
-        .section-label { font-size:0.7rem; font-weight:500; letter-spacing:0.25em; text-transform:uppercase; color:#a87c3e; }
-        .gold-divider { width:100%; height:1px; background:linear-gradient(90deg,transparent,#a87c3e40,transparent); }
-        .scrollbar-none::-webkit-scrollbar { display:none; }
-        .scrollbar-none { -ms-overflow-style:none; scrollbar-width:none; }
-        .line-clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-      `}</style>
-
       {filtered ? (
         <main className="beef-page">
           {/* ── HERO ── */}

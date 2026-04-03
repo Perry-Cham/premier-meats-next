@@ -9,6 +9,7 @@ import {
 import { useRef, useState, useEffect } from "react";
 import { TrendingUp, HandCoins, Target } from "lucide-react";
 import { Reveal } from "@/components/pages/about_page_components/about_page_components";
+import Image from "next/image";
 
 /* ─────────────────────────────────────────────────────────
    COLOUR TOKENS  (light scheme)
@@ -120,7 +121,7 @@ function ProductCard({ item, index }: { item: typeof PRODUCTS[0]; index: number 
     <Reveal direction="up" delay={index * 120}>
       <motion.a
         href={item.href}
-        className="group block overflow-hidden rounded-sm bg-white shadow-sm border border-[#e8e2d9] cursor-pointer"
+        className="group block overflow-hidden rounded-sm bg-white shadow-sm border border-[#e8e2d9] cursor-pointer min-h-[534px]"
         whileHover={{ y: -6, boxShadow: "0 24px 48px rgba(28,25,23,0.12)" }}
         transition={SPRING}
       >
@@ -139,7 +140,7 @@ function ProductCard({ item, index }: { item: typeof PRODUCTS[0]; index: number 
         </div>
         <div className="p-6">
           <h3 className="serif text-3xl font-light text-[#1c1917] mb-2">{item.title}</h3>
-          <p className="text-[#78716c] text-sm leading-relaxed mb-5">{item.desc}</p>
+          <p className="text-[#78716c]  leading-relaxed mb-5">{item.desc}</p>
           <motion.div
             className="flex items-center gap-2 text-[#a87c3e] text-xs tracking-[0.2em] uppercase"
             whileHover={{ x: 5 }}
@@ -257,20 +258,24 @@ export default function Home() {
         {/* ── HERO ── */}
         <section ref={heroRef} className="relative h-screen min-h-[600px] flex flex-col justify-end overflow-hidden">
           <motion.div className="absolute inset-0" style={{ y: heroY, scale: 1.12 }}>
-            <img
+            <Image
               src="https://ik.imagekit.io/ypgvaedes/Images/Hero.jpeg?updatedAt=1763243890397"
               alt="Yetu Meats"
+              fill={true}
               className="w-full h-full object-cover"
+              loading="eager"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#f7f4ef] via-[#1c1917]/35 to-[#1c1917]/15" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#f7f4ef] via-[#1c1917]/45 to-[#1c1917]/25" />
           </motion.div>
 
           {/* spinning badge */}
           <div className="absolute top-[20%] right-8 md:right-16 z-10 hidden md:flex flex-col items-center justify-center w-30 h-30 border border-[#a87c3e]/30 rounded-full bg-white/80 backdrop-blur-sm">
             <div className="spin-slow absolute inset-0">
-              <img
+              <Image
               src="/api/media/file/IMG-20260325-WA0000_1_-removebg-preview.png"
               className="object-cover"
+              alt="logo"
+              fill={true}
               />
             </div>
             <span className="serif text-2xl text-[#a87c3e] font-light">PM</span>
@@ -418,7 +423,7 @@ export default function Home() {
         {/* ── PARALLAX BANNER ── */}
         <section className="relative h-[45vh] overflow-hidden flex items-center justify-center">
           <ParallaxImage
-            src="https://ik.imagekit.io/ypgvaedes/Product%20Images/Aesthetic%20Photos/meat_counter_in_the_supermarket_1190595804.jpg"
+            src="https://plus.unsplash.com/premium_photo-1661963986760-6e0213e25927?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Meat counter"
             strength={60}
             className="absolute inset-0 w-full h-full"

@@ -177,12 +177,10 @@ Vercel Blob storage is provisioned from the Vercel dashboard under the Storage t
 - Add ISR to the products page to optimize performance and reduce database hits.
 - Update the images to use the nextjs image component to optimize load times
 - Export metadata from landing and about pages to improve SEO
-- Fix infinite loading screen on products Page
 - Add a separate directory for typescript types
-- Remove redundant shadcn copmponents
 
 ---
 
 ## Licence
 
-This project is unlicensed and intended for personal/hobby use only. All business content, branding, and copy belongs to Premier Meats, Lusaka, Zambia.
+This project is unlicensed and intended for personal/hobby use only. All business content, branding, and copy belongs to Yetu Meats, Lusaka, Zambia.

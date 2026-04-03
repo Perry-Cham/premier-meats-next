@@ -48,7 +48,7 @@ export default function ContactPage() {
               <div className="space-y-2">
                 <div className="grid grid-cols-2">
                   <p className="font-semibold text-gray-700">Account Holder:</p>
-                  <p className="text-gray-600">Premier Meats</p>
+                  <p className="text-gray-600">YetuMeats</p>
                 </div>
                 <div className="grid grid-cols-2">
                   <p className="font-semibold text-gray-700">Bank:</p>
@@ -87,7 +87,7 @@ export default function ContactPage() {
           <div className="bg-white shadow-lg rounded-lg p-6 mb-8">
             <h2 className="text-2xl font-bold mb-4 text-gray-800">Contact Details:</h2>
             <div className="space-y-2 mb-4">
-              <p className="text-gray-700 font-semibold">PREMIER MEATS,</p>
+              <p className="text-gray-700 font-semibold">YetuMEATS,</p>
               <p className="text-gray-600">No. 5 Nyemba Close,</p>
               <p className="text-gray-600">Woodlands</p>
               <p className="text-gray-600">Lusaka</p>

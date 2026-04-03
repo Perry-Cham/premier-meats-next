@@ -8,8 +8,8 @@ import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import path from "path";
 import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
-//import sharp from "sharp";
-
+import sharp from "sharp";
+// Where I impor payload collections
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Products } from "./collections/Products";
@@ -32,13 +32,13 @@ export default buildConfig({
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: mongooseAdapter({
-    url: process.env.DATABASE_URI,
+    url: process.env.DATABASE_URL,
   }),
-  // sharp,
+  sharp,
   plugins: [
   vercelBlobStorage({
     enabled:true,
-    token:process.env.BLOB_TOKEN,
+    token:process.env.BLOB_READ_WRITE_TOKEN,
     collections:{
       media:true,
     }

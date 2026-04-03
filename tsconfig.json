@@ -38,7 +38,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
-  ],
+, "components/pages/about_page_components"  ],
   "exclude": [
     "node_modules"
   ]

@@ -55,53 +55,56 @@ interface PageContent {
   content: HeroText;
   products: Record<string, Product[]>;
 }
-async function getData(category: string): Promise<PageContent> {
-  const payload = await getPayload({ config });
-
-  const [products_res, content_res] = await Promise.all([
-    payload.find({
-      collection: "products",
-      where: { category: { equals: category } },
-    }),
-    payload.find({
-      collection: "productpage",
-      where: { category: { equals: category } },
-    }),
-  ]);
-
-  const products = products_res.docs as Product[];
-  const content = content_res.docs[0] as HeroText;
-
-  const processedProducts = products.reduce<Record<string, Product[]>>(
-    (acc, item) => {
-      item.imagesrc = item.images[0].image.url;
-      if (!acc[item.subcategory]) acc[item.subcategory] = [];
-      acc[item.subcategory].push(item);
-      return acc;
-    },
-    {}
-  );
-
-  return { content, products: processedProducts };
-}
-
-// ← Inner component: lives inside Suspense, so await params is fine here
-async function PageContent({
+async function Shell({
   params,
 }: {
   params: Promise<{ category: string }>;
 }) {
+ // "use cache";
+  const payload = await getPayload({ config });
   const { category } = await params;
-  const data = await getData(category);
+  const products_res = await payload.find({
+    collection: "products",
+    where: {
+      category: {
+        equals: category,
+      },
+    },
+  });
+
+  const products = products_res.docs as Product[];
+
+  const content_res = await payload.find({
+    collection: "productpage",
+    where: {
+      category: {
+        equals: category,
+      },
+    },
+  });
+
+  const content = content_res.docs[0] as HeroText;
+  let processedProducts = products.reduce((acc, item) => {
+    item.imagesrc = item.images[0].image.url;
+    if (!acc[item.subcategory]) {
+      acc[item.subcategory] = [];
+      acc[item.subcategory].push(item);
+    } else {
+      acc[item.subcategory].push(item);
+    }
+    return acc;
+  }, {} as Record<string, any>);
+
+  const data = { content: content, products: processedProducts };
   return <Product_Page data={data} />;
 }
 
-// ← Outer shell: sets up the Suspense boundary synchronously
 export default function Page({
   params,
 }: {
   params: Promise<{ category: string }>;
 }) {
+  
   return (
     <Suspense
       fallback={
@@ -111,7 +114,7 @@ export default function Page({
         </div>
       }
     >
-      <PageContent params={params} />
+      <Shell params={params} />
     </Suspense>
   );
 }

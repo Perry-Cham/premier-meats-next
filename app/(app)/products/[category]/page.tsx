@@ -60,7 +60,7 @@ async function Shell({
 }: {
   params: Promise<{ category: string }>;
 }) {
-  "use cache";
+ // "use cache";
   const payload = await getPayload({ config });
   const { category } = await params;
   const products_res = await payload.find({

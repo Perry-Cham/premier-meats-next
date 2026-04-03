@@ -1,8 +1,23 @@
 import "@/styles/globals.css";
-
 import Nav from "@/components/navbar1";
 import Footer from "@/components/custom/footer";
+import { Cormorant_Garamond, Jost } from 'next/font/google';
 
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['300', '400', '600'],        // the weights you use
+  style: ['normal', 'italic'],          // if you need italics
+  variable: '--font-cormorant',         // optional but recommended
+  display: 'swap',                      // prevents invisible text
+});
+
+const jost = Jost({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-jost',
+  display: 'swap',
+});
+console.log(cormorant, jost)
 export default function RootLayout({
   children,
 }: {

@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap");
 
 @plugin "tailwindcss-animate";
 
@@ -12,7 +11,7 @@
 /* ========= CUSTOM STYLES ========= */
 /* LANDING PAGE STYLES */
 .home-page {
-  font-family: "Jost", sans-serif;
+  font-family: Jost, sans-serif;
   background: #f7f4ef;
   color: #1c1917;
 }
@@ -69,13 +68,11 @@
 
 /* PRODUCT PAGE STYLES */
 .beef-page {
-  font-family: "Jost", sans-serif;
+  font-family: var(--font-jost), sans-serif;
   background: #f7f4ef;
   color: #1c1917;
 }
-.serif {
-  font-family: "Cormorant Garamond", serif;
-}
+
 
 .gold-divider {
   width: 100%;

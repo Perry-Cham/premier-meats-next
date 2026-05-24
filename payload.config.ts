@@ -18,6 +18,19 @@ import { ProductPages } from "./collections/Product-Pages";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
+const requiredEnvVars = {
+DATABASE_URL: process.env.DATABASE_URL,
+PAYLOAD_SECRET:  process.env.PAYLOAD_SECRET,
+BLOB_READ_WRITE_TOKEN:process.env.BLOB_READ_WRITE_TOKEN
+}
+
+for(const [key, value] of Object.entries(requiredEnvVars)){
+  if(requiredEnvVars[key] == undefined || value == ""){
+    throw new Error(`Missing env var ${key}`);
+    
+  }
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,

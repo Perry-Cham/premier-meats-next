@@ -60,7 +60,7 @@ interface Navbar1Props {
 const Navbar1 = ({
   logo = {
     url: "/",
-    src: "#",
+    src: "/api/media/file/IMG-20260325-WA0000_1_-removebg-preview.png",
     alt: "logo",
     title: "Yetu Meats",
   },
@@ -134,13 +134,16 @@ const Navbar1 = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
+            <div className="flex items-center justify-between w-[25%]">
             <Link href={logo.url} className="flex items-center gap-2">
               <img
                 src={logo.src}
-                className="max-h-8 dark:invert"
+                className="max-h-10 dark:invert"
                 alt={logo.alt}
               />
+              <h1 className="font-bold serif text-2xl text-red-800">Yetu</h1>
             </Link>
+            </div>
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -169,7 +172,7 @@ const Navbar1 = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
-                    <Button asChild>
+                    <Button className="bg-red-600 hover:bg-red-500" asChild>
                       <Link href="/contact">Contact Us</Link>
                     </Button>
                   </div>

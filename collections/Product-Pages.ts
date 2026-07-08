@@ -9,7 +9,10 @@ export const ProductPages: CollectionConfig = {
         group: 'Store',           // Optional: groups this collection in the sidebar
     },
     access: {
-        read: () => true,
+        read: () => true,                 // public can read products
+        create: ({ req }) => !!req.user,  // only logged-in admins
+        update: ({ req }) => !!req.user,
+        delete: ({ req }) => !!req.user,
     },
     fields: [
         {

@@ -18,18 +18,7 @@ import { ProductPages } from "./collections/Product-Pages";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-const requiredEnvVars = {
-DATABASE_URL: process.env.DATABASE_URL,
-PAYLOAD_SECRET:  process.env.PAYLOAD_SECRET,
-BLOB_READ_WRITE_TOKEN:process.env.BLOB_READ_WRITE_TOKEN
-}
-
-for(const [key, value] of Object.entries(requiredEnvVars)){
-  if(requiredEnvVars[key] == undefined || value == ""){
-    throw new Error(`Missing env var ${key}`);
-    
-  }
-}
+checkEnvs();
 
 export default buildConfig({
   admin: {
@@ -60,3 +49,21 @@ export default buildConfig({
   })
   ],
 });
+
+function checkEnvs(): void{
+const requiredEnvVars = {
+DATABASE_URL: process.env.DATABASE_URL,
+PAYLOAD_SECRET:  process.env.PAYLOAD_SECRET,
+BLOB_READ_WRITE_TOKEN:process.env.BLOB_READ_WRITE_TOKEN
+}
+
+const missingEnvs: Array<string> = [];
+for(const [key, value] of Object.entries(requiredEnvVars)){
+  if(value == undefined || value.trim() == ""){
+   missingEnvs.push(key);
+  }
+}
+if(missingEnvs.length > 0){
+  throw new Error(`Missing environment variables ${missingEnvs.join("  ")}`);
+}
+}

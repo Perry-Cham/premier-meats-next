@@ -1,20 +1,22 @@
 import type { CollectionConfig } from 'payload'
+import { createTitle } from './utils';
 
 export const Media: CollectionConfig = {
   slug: 'media',
   access: {
-    read: () => true,
+    read: () => true,                 // public can read products
+    create: ({ req }) => !!req.user,  // only logged-in admins
+    update: ({ req }) => !!req.user,
+    delete: ({ req }) => !!req.user,
   },
   fields: [
     {
       name: 'alt',
       type: 'text',
-      // required: true,
       hooks: {
         beforeChange: [({ data, value }): string => {
           if (!value) {
-            const title = data.filename.split()[0];
-            return title;
+            return createTitle(data.filename);
           } else return value
         }]
       }
@@ -22,3 +24,4 @@ export const Media: CollectionConfig = {
   ],
   upload: true,
 }
+

@@ -38,6 +38,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  serverURL:process.env.NEXT_PUBLIC_SERVER_URL,
   collections: [Users, Media, Products, ProductPages],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

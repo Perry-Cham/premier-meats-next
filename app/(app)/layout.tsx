@@ -17,7 +17,6 @@ const jost = Jost({
   variable: '--font-jost',
   display: 'swap',
 });
-console.log(cormorant, jost)
 export default function RootLayout({
   children,
 }: {

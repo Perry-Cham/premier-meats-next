@@ -17,7 +17,6 @@ const jost = Jost({
   variable: '--font-jost',
   display: 'swap',
 });
-console.log(cormorant, jost)
 export default function RootLayout({
   children,
 }: {
@@ -27,7 +26,7 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <head />
       <body>
-        <Nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200"/>
+        <Nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-brand-border"/>
         <div className="relative flex flex-col ">{children}</div>
         <Footer />
       </body>

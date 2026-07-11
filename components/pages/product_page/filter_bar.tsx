@@ -11,14 +11,14 @@ export default function FilterBar({
   onSelect: (s: string | null) => void;
 }) {
   return (
-    <div className="sticky top-0 z-30 bg-[#f7f4ef]/95 backdrop-blur-sm border-b border-[#e8e2d9]">
+    <div className="sticky top-0 z-30 bg-brand-cream/95 backdrop-blur-sm border-b border-brand-border">
       <div className="max-w-6xl mx-auto px-6 md:px-12 py-3 flex gap-2 overflow-x-auto scrollbar-none">
         <button
           onClick={() => onSelect(null)}
           className={`flex-shrink-0 text-[0.65rem] tracking-[0.18em] uppercase px-4 py-2 rounded-sm border transition-all duration-200 ${
             active === null
-              ? "bg-[#1c1917] text-white border-[#1c1917]"
-              : "border-[#e8e2d9] text-[#78716c] hover:border-[#a87c3e] hover:text-[#a87c3e]"
+              ? "bg-brand-dark text-white border-brand-dark"
+              : "border-brand-border text-brand-muted hover:border-brand-gold hover:text-brand-gold"
           }`}
         >
           All Cuts
@@ -29,8 +29,8 @@ export default function FilterBar({
             onClick={() => onSelect(s)}
             className={`flex-shrink-0 text-[0.65rem] tracking-[0.18em] uppercase px-4 py-2 rounded-sm border transition-all duration-200 ${
               active === s
-                ? "bg-[#c41e2a] text-white border-[#c41e2a]"
-                : "border-[#e8e2d9] text-[#78716c] hover:border-[#c41e2a] hover:text-[#c41e2a]"
+                ? "bg-brand-red text-white border-brand-red"
+                : "border-brand-border text-brand-muted hover:border-brand-red hover:text-brand-red"
             }`}
           >
             {s}

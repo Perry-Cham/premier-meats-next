@@ -10,30 +10,6 @@ import { useRef, useState, useEffect } from "react";
 import { TrendingUp, HandCoins, Target } from "lucide-react";
 import { Reveal } from "@/components/pages/about_page_components/about_page_components";
 
-/* ─────────────────────────────────────────────────────────
-   COLOUR TOKENS  (light scheme)
-   bg:        warm off-white  #f7f4ef
-   surface:   white           #ffffff
-   surface2:  pale cream      #f0ece4
-   ink:       deep charcoal   #1c1917
-   muted:     warm grey       #78716c
-   gold:      warm amber      #a87c3e
-   red:       brand red       #c41e2a
-───────────────────────────────────────────────────────── */
-
-const SPRING = { type: "spring", stiffness: 60, damping: 18 } as const;
-const EASE   = { duration: 0.7, ease: [0.16, 1, 0.3, 1] } as const;
-
-
-/* ────────────────────────────────────────────────────────
-   Parallax image
-   Mechanism: useScroll tracks how far the target element
-   has scrolled through the viewport (0 = enters bottom,
-   1 = exits top). useTransform maps that 0→1 range to a
-   -strength→+strength pixel offset on Y. useSpring adds
-   physical lag so the image "drags" behind the scroll
-   rather than moving in lockstep.
-──────────────────────────────────────────────────────── */
 function ParallaxImage({
   src, alt, strength = 80, className = "",
 }: {
@@ -59,13 +35,6 @@ function ParallaxImage({
   );
 }
 
-/* ────────────────────────────────────────────────────────
-   Ticker
-   The translateX loop is a single infinite CSS keyframe —
-   moving from 0% to -33.333% (one third of the tripled
-   list). No JS measurement or spring needed; CSS handles
-   this more efficiently than any JS library would.
-──────────────────────────────────────────────────────── */
 const TICKER_ITEMS = [
   "Fresh Beef","Zambian Pork","Free-Range Chicken",
   "Processed Meats","National Delivery","7 Days a Week",
@@ -74,11 +43,11 @@ const TICKER_ITEMS = [
 
 function Ticker() {
   return (
-    <div className="overflow-hidden border-y border-[#a87c3e]/20 bg-[#f0ece4] py-3 select-none">
+    <div className="overflow-hidden border-y border-brand-gold/20 bg-brand-off-white py-3 select-none">
       <div className="ticker-track flex gap-12 whitespace-nowrap">
         {[...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
-          <span key={i} className="inline-flex items-center gap-4 text-[0.7rem] tracking-[0.25em] uppercase text-[#78716c]">
-            <span className="text-[#a87c3e]">✦</span>
+          <span key={i} className="inline-flex items-center gap-4 text-[0.7rem] tracking-[0.25em] uppercase text-brand-muted">
+            <span className="text-brand-gold">✦</span>
             {item}
           </span>
         ))}
@@ -87,7 +56,6 @@ function Ticker() {
   );
 }
 
-/* ── Product card ── */
 const PRODUCTS = [
   {
     title: "Beef", href: "/products/beef",
@@ -116,11 +84,12 @@ const PRODUCTS = [
 ];
 
 function ProductCard({ item, index }: { item: typeof PRODUCTS[0]; index: number }) {
+  const SPRING = { type: "spring", stiffness: 60, damping: 18 } as const;
   return (
     <Reveal direction="up" delay={index * 120}>
       <motion.a
         href={item.href}
-        className="group block overflow-hidden rounded-sm bg-white shadow-sm border border-[#e8e2d9] cursor-pointer"
+        className="group block overflow-hidden rounded-sm bg-white shadow-sm border border-brand-border cursor-pointer"
         whileHover={{ y: -6, boxShadow: "0 24px 48px rgba(28,25,23,0.12)" }}
         transition={SPRING}
       >
@@ -132,16 +101,16 @@ function ProductCard({ item, index }: { item: typeof PRODUCTS[0]; index: number 
             whileHover={{ scale: 1.07 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1c1917]/25 to-transparent" />
-          <div className="absolute top-4 left-4 text-[0.6rem] tracking-[0.2em] uppercase bg-[#c41e2a] text-white px-3 py-1">
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/25 to-transparent" />
+          <div className="absolute top-4 left-4 text-[0.6rem] tracking-[0.2em] uppercase bg-brand-red text-white px-3 py-1">
             {item.tag}
           </div>
         </div>
         <div className="p-6">
-          <h3 className="serif text-3xl font-light text-[#1c1917] mb-2">{item.title}</h3>
-          <p className="text-[#78716c] text-sm leading-relaxed mb-5">{item.desc}</p>
+          <h3 className="serif text-3xl font-light text-brand-dark mb-2">{item.title}</h3>
+          <p className="text-brand-muted text-sm leading-relaxed mb-5">{item.desc}</p>
           <motion.div
-            className="flex items-center gap-2 text-[#a87c3e] text-xs tracking-[0.2em] uppercase"
+            className="flex items-center gap-2 text-brand-gold text-xs tracking-[0.2em] uppercase"
             whileHover={{ x: 5 }}
             transition={SPRING}
           >
@@ -153,25 +122,24 @@ function ProductCard({ item, index }: { item: typeof PRODUCTS[0]; index: number 
   );
 }
 
-/* ── Pillar card ── */
 function PillarCard({ icon, title, body, index }: { icon: React.ReactNode; title: string; body: string; index: number }) {
+  const SPRING = { type: "spring", stiffness: 60, damping: 18 } as const;
   return (
     <Reveal direction="up" delay={index * 150}>
       <motion.div
-        className="relative border border-[#e8e2d9] rounded-sm p-8 bg-white overflow-hidden cursor-default"
+        className="relative border border-brand-border rounded-sm p-8 bg-white overflow-hidden cursor-default"
         whileHover={{ borderColor: "#a87c3e", backgroundColor: "#fdfaf6" }}
         transition={{ duration: 0.3 }}
       >
-        <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[#c41e2a]/20" />
-        <div className="text-[#a87c3e] mb-6">{icon}</div>
-        <h3 className="serif text-2xl font-light text-[#1c1917] mb-4">{title}</h3>
-        <p className="text-[#78716c] text-sm leading-relaxed">{body}</p>
+        <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-brand-red/20" />
+        <div className="text-brand-gold mb-6">{icon}</div>
+        <h3 className="serif text-2xl font-light text-brand-dark mb-4">{title}</h3>
+        <p className="text-brand-muted text-sm leading-relaxed">{body}</p>
       </motion.div>
     </Reveal>
   );
 }
 
-/* ── Stat with count-up ── */
 function Stat({ value, label, delay }: { value: string; label: string; delay: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
@@ -179,6 +147,7 @@ function Stat({ value, label, delay }: { value: string; label: string; delay: nu
   const suffix = value.replace(/[0-9]/g, "");
   const target = parseInt(numStr || "0", 10);
   const [count, setCount] = useState(0);
+  const EASE   = { duration: 0.7, ease: [0.16, 1, 0.3, 1] } as const;
 
   useEffect(() => {
     if (!inView || !target) return;
@@ -204,29 +173,28 @@ function Stat({ value, label, delay }: { value: string; label: string; delay: nu
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ ...EASE, delay: delay / 1000 }}
     >
-      <div className="serif text-5xl md:text-6xl font-light text-[#c41e2a] mb-2">
+      <div className="serif text-5xl md:text-6xl font-light text-brand-red mb-2">
         {target ? `${count}${suffix}` : value}
       </div>
-      <div className="text-[0.65rem] tracking-[0.25em] uppercase text-[#78716c]">{label}</div>
+      <div className="text-[0.65rem] tracking-[0.25em] uppercase text-brand-muted">{label}</div>
     </motion.div>
   );
 }
 
-/* ── Fill-slide CTA button ── */
 function FillButton({ href, children, outline = false }: { href: string; children: React.ReactNode; outline?: boolean }) {
   const [hovered, setHovered] = useState(false);
   return (
     <motion.a
       href={href}
       className={`relative inline-flex items-center overflow-hidden border text-sm tracking-[0.2em] uppercase px-10 py-4 ${
-        outline ? "border-black text-[#1c1917]" : "border-[#c41e2a] text-[#1c1917]"
+        outline ? "border-brand-dark text-brand-dark" : "border-brand-red text-brand-dark"
       }`}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       whileTap={{ scale: 0.97 }}
     >
       <motion.span
-        className={`absolute inset-0 ${outline ? "bg-[#a87c3e]/50" : "bg-[#c41e2a]"}`}
+        className={`absolute inset-0 ${outline ? "bg-brand-gold/50" : "bg-brand-red"}`}
         initial={{ x: "-101%" }}
         animate={{ x: hovered ? "0%" : "-101%" }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
@@ -238,9 +206,6 @@ function FillButton({ href, children, outline = false }: { href: string; childre
   );
 }
 
-/* ────────────────────────────────────────────────────────
-   PAGE
-──────────────────────────────────────────────────────── */
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
 
@@ -249,6 +214,9 @@ export default function Home() {
     offset: ["start start", "end start"],
   });
   const heroY = useTransform(heroProgress, [0, 1], ["0%", "30%"]);
+
+  const SPRING = { type: "spring", stiffness: 60, damping: 18 } as const;
+  const EASE   = { duration: 0.7, ease: [0.16, 1, 0.3, 1] } as const;
 
   return (
     <>
@@ -262,18 +230,18 @@ export default function Home() {
               alt="Yetu Meats"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#f7f4ef] via-[#1c1917]/35 to-[#1c1917]/15" />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-cream via-brand-dark/35 to-brand-dark/15" />
           </motion.div>
 
           {/* spinning badge */}
-          <div className="absolute top-[20%] right-8 md:right-16 z-10 hidden md:flex flex-col items-center justify-center w-30 h-30 border border-[#a87c3e]/30 rounded-full bg-white/80 backdrop-blur-sm">
+          <div className="absolute top-[20%] right-8 md:right-16 z-10 hidden md:flex flex-col items-center justify-center w-30 h-30 border border-brand-gold/30 rounded-full bg-white/80 backdrop-blur-sm">
             <div className="spin-slow absolute inset-0">
               <img
               src="/api/media/file/IMG-20260325-WA0000_1_-removebg-preview.png"
               className="object-cover"
               />
             </div>
-            <span className="serif text-2xl text-[#a87c3e] font-light">PM</span>
+            <span className="serif text-2xl text-brand-gold font-light">PM</span>
           </div>
 
           {/* hero copy — word-by-word entrance */}
@@ -325,9 +293,9 @@ export default function Home() {
             animate={{ opacity: 0.5 }}
             transition={{ delay: 1.4, duration: 1 }}
           >
-            <span className="text-[0.6rem] tracking-[0.3em] uppercase text-[#78716c]">Scroll</span>
+            <span className="text-[0.6rem] tracking-[0.3em] uppercase text-brand-muted">Scroll</span>
             <motion.div
-              className="w-px h-10 bg-gradient-to-b from-[#a87c3e] to-transparent"
+              className="w-px h-10 bg-gradient-to-b from-brand-gold to-transparent"
               animate={{ scaleY: [1, 0.3, 1], opacity: [0.5, 1, 0.5] }}
               transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
             />
@@ -342,14 +310,14 @@ export default function Home() {
           <div className="grid md:grid-cols-[1fr_1.2fr] gap-16 md:gap-24 items-center">
             <Reveal direction="left">
               <p className="section-label mb-4 red-rule">Who We Are</p>
-              <h2 className="serif text-4xl md:text-5xl lg:text-6xl font-light text-[#1c1917] leading-tight mb-8">
+              <h2 className="serif text-4xl md:text-5xl lg:text-6xl font-light text-brand-dark leading-tight mb-8">
                 Number One.<br />
-                <em className="text-[#a87c3e]">Second to None.</em>
+                <em className="text-brand-gold">Second to None.</em>
               </h2>
-              <p className="text-[#78716c] leading-relaxed mb-6 text-[0.95rem]">
-                The word <strong className="text-[#a87c3e]">PREMIER</strong> means First Class, Top Notch. We are a player in the wholesale and retail of an assortment of fresh and processed meat products in the Zambian, regional and international markets.
+              <p className="text-brand-muted leading-relaxed mb-6 text-[0.95rem]">
+                The word <strong className="text-brand-gold">PREMIER</strong> means First Class, Top Notch. We are a player in the wholesale and retail of an assortment of fresh and processed meat products in the Zambian, regional and international markets.
               </p>
-              <p className="text-[#78716c] leading-relaxed text-[0.95rem]">
+              <p className="text-brand-muted leading-relaxed text-[0.95rem]">
                 Whether you are a caterer, restaurateur, trader, wholesaler, retailer, or simply a consumer — we have a range of products packed especially for your needs.
               </p>
               <div className="mt-10">
@@ -366,7 +334,7 @@ export default function Home() {
                   className="rounded-sm aspect-[4/5]"
                 />
                 <motion.div
-                  className="absolute -bottom-6 -left-6 bg-[#c41e2a] p-6 rounded-sm hidden md:block"
+                  className="absolute -bottom-6 -left-6 bg-brand-red p-6 rounded-sm hidden md:block"
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -375,7 +343,7 @@ export default function Home() {
                   <div className="serif text-4xl font-light text-white">7</div>
                   <div className="text-[0.65rem] tracking-[0.2em] uppercase text-white/80 mt-1">Days a Week</div>
                 </motion.div>
-                <div className="absolute -top-4 -right-4 w-20 h-20 border border-[#a87c3e]/25 rounded-sm hidden md:block" />
+                <div className="absolute -top-4 -right-4 w-20 h-20 border border-brand-gold/25 rounded-sm hidden md:block" />
               </div>
             </Reveal>
           </div>
@@ -384,7 +352,7 @@ export default function Home() {
         <div className="gold-divider" />
 
         {/* ── STATS ── */}
-        <section className="py-20 bg-[#f0ece4]">
+        <section className="py-20 bg-brand-off-white">
           <div className="max-w-4xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-10">
             <Stat value="14+" label="Years Experience" delay={0} />
             <Stat value="150" label="Planned Outlets" delay={100} />
@@ -400,8 +368,8 @@ export default function Home() {
           <Reveal>
             <div className="text-center mb-16">
               <p className="section-label mb-4">Our Foundation</p>
-              <h2 className="serif text-4xl md:text-5xl font-light text-[#1c1917]">
-                Vision. Mission. <em className="text-[#a87c3e]">Strength.</em>
+              <h2 className="serif text-4xl md:text-5xl font-light text-brand-dark">
+                Vision. Mission. <em className="text-brand-gold">Strength.</em>
               </h2>
             </div>
           </Reveal>
@@ -423,11 +391,11 @@ export default function Home() {
             strength={60}
             className="absolute inset-0 w-full h-full"
           />
-          <div className="absolute inset-0 bg-[#f7f4ef]/60" />
+          <div className="absolute inset-0 bg-brand-cream/60" />
           <Reveal>
             <div className="relative z-10 text-center px-6">
               <p className="section-label mb-4">Our Promise</p>
-              <blockquote className="serif text-3xl md:text-5xl lg:text-6xl font-light text-[#1c1917] max-w-3xl leading-tight">
+              <blockquote className="serif text-3xl md:text-5xl lg:text-6xl font-light text-brand-dark max-w-3xl leading-tight">
                 <em>"On the move 7 days a week."</em>
               </blockquote>
             </div>
@@ -440,8 +408,8 @@ export default function Home() {
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
               <div>
                 <p className="section-label mb-4 red-rule">What We Offer</p>
-                <h2 className="serif text-4xl md:text-5xl font-light text-[#1c1917] leading-tight">
-                  Our <em className="text-[#a87c3e]">Products</em>
+                <h2 className="serif text-4xl md:text-5xl font-light text-brand-dark leading-tight">
+                  Our <em className="text-brand-gold">Products</em>
                 </h2>
               </div>
             </div>
@@ -456,15 +424,15 @@ export default function Home() {
         <div className="gold-divider" />
 
         {/* ── WHY PREMIER ── */}
-        <section className="py-24 md:py-32 bg-[#f0ece4]">
+        <section className="py-24 md:py-32 bg-brand-off-white">
           <div className="max-w-6xl mx-auto px-6 md:px-12">
             <Reveal>
               <p className="section-label mb-4 red-rule">Why Premier</p>
-              <h2 className="serif text-4xl md:text-5xl font-light text-[#1c1917] mb-16">
-                The Yetu <em className="text-[#a87c3e]">Difference</em>
+              <h2 className="serif text-4xl md:text-5xl font-light text-brand-dark mb-16">
+                The Yetu <em className="text-brand-gold">Difference</em>
               </h2>
             </Reveal>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#a87c3e]/10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-brand-gold/10">
               {[
                 { num: "01", title: "Daily Delivery",    body: "Local and out-of-town deliveries made every single day, seven days a week." },
                 { num: "02", title: "National Reach",    body: "Physical retail presence across all ten provinces of the Republic of Zambia." },
@@ -473,7 +441,7 @@ export default function Home() {
               ].map((item, i) => (
                 <Reveal key={item.num} direction="up" delay={i * 100}>
                   <motion.div
-                    className="bg-[#f0ece4] p-8 h-full"
+                    className="bg-brand-off-white p-8 h-full"
                     whileHover={{ backgroundColor: "#ffffff" }}
                     transition={{ duration: 0.25 }}
                   >
@@ -485,8 +453,8 @@ export default function Home() {
                     >
                       {item.num}
                     </motion.div>
-                    <h3 className="text-[#1c1917] font-medium text-sm tracking-wide mb-3">{item.title}</h3>
-                    <p className="text-[#78716c] text-sm leading-relaxed">{item.body}</p>
+                    <h3 className="text-brand-dark font-medium text-sm tracking-wide mb-3">{item.title}</h3>
+                    <p className="text-brand-muted text-sm leading-relaxed">{item.body}</p>
                   </motion.div>
                 </Reveal>
               ))}
@@ -497,14 +465,14 @@ export default function Home() {
         <div className="gold-divider" />
 
         {/* ── CTA ── */}
-        <section className="py-28 md:py-40 text-center px-6 bg-[#f7f4ef]">
+        <section className="py-28 md:py-40 text-center px-6 bg-brand-cream">
           <Reveal>
             <p className="section-label mb-6">Ready to Order?</p>
-            <h2 className="serif text-5xl md:text-6xl lg:text-7xl font-light text-[#1c1917] mb-8 leading-tight">
+            <h2 className="serif text-5xl md:text-6xl lg:text-7xl font-light text-brand-dark mb-8 leading-tight">
               Let's Work<br />
-              <em className="text-[#a87c3e]">Together.</em>
+              <em className="text-brand-gold">Together.</em>
             </h2>
-            <p className="text-[#78716c] max-w-lg mx-auto mb-12 leading-relaxed">
+            <p className="text-brand-muted max-w-lg mx-auto mb-12 leading-relaxed">
               Our sales representatives will get back to you within an hour. Reach out via our contact page or visit one of our outlets.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">

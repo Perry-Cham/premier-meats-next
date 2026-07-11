@@ -10,9 +10,6 @@ import FilterBar from "@/components/pages/product_page/filter_bar";
 import EnquiryBar from "@/components/pages/product_page/enquiry_bar";
 import { LoaderCircle } from "lucide-react";
 
-/* ─────────────────────────────────────────────────
-   FRAMER HELPERS
-───────────────────────────────────────────────── */
 const EASE = { duration: 0.7, ease: [0.16, 1, 0.3, 1] } as const;
 
 function Reveal({
@@ -46,20 +43,17 @@ function Reveal({
   );
 }
 
-/* ─────────────────────────────────────────────────
-   SUBCATEGORY SECTION HEADER
-───────────────────────────────────────────────── */
 function SectionHeader({ title, count }: { title: string; count: number }) {
   return (
     <Reveal direction="left">
       <div className="flex items-end gap-6 mb-8">
         <div>
-          <div className="w-10 h-0.5 bg-[#c41e2a] mb-3" />
-          <h2 className="serif text-3xl md:text-4xl font-light text-[#1c1917]">
+          <div className="w-10 h-0.5 bg-brand-red mb-3" />
+          <h2 className="serif text-3xl md:text-4xl font-light text-brand-dark">
             {title}
           </h2>
         </div>
-        <span className="serif text-5xl font-light text-[#c41e2a]/15 leading-none mb-1">
+        <span className="serif text-5xl font-light text-brand-red/15 leading-none mb-1">
           {String(count).padStart(2, "0")}
         </span>
       </div>
@@ -67,9 +61,6 @@ function SectionHeader({ title, count }: { title: string; count: number }) {
   );
 }
 
-/* ─────────────────────────────────────────────────
-   PAGE
-───────────────────────────────────────────────── */
 interface Image {
   createdAt: string;
   updatedAt: string;
@@ -123,12 +114,9 @@ export default function Product_Page({ data }: { data: PageContent }) {
   const [filtered, setFiltered] = useState<Record<string, Product[]> | null>(null);
   const [totalProducts, setTotalProducts] = useState(0);
 
-  // Get the page content from data 
   const {content, products} = data;
 
-
   useEffect(() => {
-    //Set Content to data
     let p = totalProducts;
     for (const [key, value] of Object.entries(data.products)) {
       let p = totalProducts;
@@ -137,7 +125,6 @@ export default function Product_Page({ data }: { data: PageContent }) {
     }
   }, []);
 
-  // Filter products by the selected subcategory
   useEffect(() => {
     if (activeFilter === null && content) {
       setFiltered(data.products);
@@ -155,14 +142,13 @@ export default function Product_Page({ data }: { data: PageContent }) {
         <main className="beef-page">
           {/* ── HERO ── */}
           <section className="relative h-[72vh] min-h-[520px] flex flex-col justify-end overflow-hidden">
-            {/* warm light overlay — not black, consistent with light theme */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#f7f4ef] via-[#f7f4ef]/20 to-transparent z-10" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#f7f4ef]/50 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-cream via-brand-cream/20 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-cream/50 to-transparent z-10" />
 
             <div className="relative z-20 max-w-6xl mx-auto w-full px-6 md:px-12 pb-16 md:pb-20">
               <div className="overflow-hidden mb-4">
                 <motion.h1
-                  className="serif font-light text-[#1c1917] leading-[0.88]"
+                  className="serif font-light text-brand-dark leading-[0.88]"
                   style={{ fontSize: "clamp(4rem,11vw,9rem)" }}
                   initial={{ y: "105%", opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -180,7 +166,7 @@ export default function Product_Page({ data }: { data: PageContent }) {
               >
                 <RichText
                   data={content.content}
-                  className="text-[#78716c] leading-relaxed mb-2 text"
+                  className="text-brand-muted leading-relaxed mb-2 text"
                 />
               </motion.div>
 
@@ -200,10 +186,10 @@ export default function Product_Page({ data }: { data: PageContent }) {
                   { value: "Daily", label: "Restocked" },
                 ].map((s) => (
                   <div key={s.label}>
-                    <div className="serif text-3xl font-light text-[#c41e2a]">
+                    <div className="serif text-3xl font-light text-brand-red">
                       {s.value}
                     </div>
-                    <div className="text-[0.6rem] tracking-[0.2em] uppercase text-[#78716c] mt-0.5">
+                    <div className="text-[0.6rem] tracking-[0.2em] uppercase text-brand-muted mt-0.5">
                       {s.label}
                     </div>
                   </div>
@@ -219,7 +205,6 @@ export default function Product_Page({ data }: { data: PageContent }) {
             onSelect={setActiveFilter}
           />
           <div className="max-w-6xl mx-auto px-6 md:px-12 py-16 space-y-20">
-            {/* ── PRODUCT SECTIONS ── */}
             {Object.entries(filtered).map(([sub, products]) => (
               <section key={sub} id={sub.toLowerCase().replace(/\s+/g, "-")}>
                 <SectionHeader title={sub} count={products.length} />
@@ -235,9 +220,9 @@ export default function Product_Page({ data }: { data: PageContent }) {
           <div className="gold-divider" />
 
           {/* ── QUALITY PROMISE ── */}
-          <section className="py-20 bg-[#f0ece4]">
+          <section className="py-20 bg-brand-off-white">
             <div className="max-w-6xl mx-auto px-6 md:px-12">
-              <div className="grid md:grid-cols-3 gap-px bg-[#a87c3e]/10">
+              <div className="grid md:grid-cols-3 gap-px bg-brand-gold/10">
                 {[
                   {
                     icon: "🌿",
@@ -257,15 +242,15 @@ export default function Product_Page({ data }: { data: PageContent }) {
                 ].map((item, i) => (
                   <Reveal key={item.title} direction="up" delay={i * 120}>
                     <motion.div
-                      className="bg-[#f0ece4] p-8 h-full"
+                      className="bg-brand-off-white p-8 h-full"
                       whileHover={{ backgroundColor: "#ffffff" }}
                       transition={{ duration: 0.25 }}
                     >
                       <div className="text-3xl mb-4">{item.icon}</div>
-                      <h3 className="serif text-xl font-light text-[#1c1917] mb-3">
+                      <h3 className="serif text-xl font-light text-brand-dark mb-3">
                         {item.title}
                       </h3>
-                      <p className="text-[#78716c] text-sm leading-relaxed">
+                      <p className="text-brand-muted text-sm leading-relaxed">
                         {item.body}
                       </p>
                     </motion.div>
@@ -276,19 +261,19 @@ export default function Product_Page({ data }: { data: PageContent }) {
           </section>
 
           {/* ── CTA ── */}
-          <section className="py-24 text-center px-6 bg-[#f7f4ef]">
+          <section className="py-24 text-center px-6 bg-brand-cream">
             <Reveal>
               <p className="section-label mb-4">Need a Custom Order?</p>
-              <h2 className="serif text-4xl md:text-5xl font-light text-[#1c1917] mb-6">
-                Wholesale & Bulk <em className="text-[#a87c3e]">Enquiries</em>
+              <h2 className="serif text-4xl md:text-5xl font-light text-brand-dark mb-6">
+                Wholesale & Bulk <em className="text-brand-gold">Enquiries</em>
               </h2>
-              <p className="text-[#78716c] max-w-md mx-auto mb-10 leading-relaxed text-sm">
+              <p className="text-brand-muted max-w-md mx-auto mb-10 leading-relaxed text-sm">
                 We supply caterers, restaurants, wholesalers, and retailers
                 across Zambia. Get in touch for volume pricing.
               </p>
               <a
                 href="/contact"
-                className="inline-block border border-[#c41e2a] text-[#1c1917] text-[0.75rem] tracking-[0.2em] uppercase px-10 py-4 hover:bg-[#c41e2a] hover:text-white transition-all duration-300"
+                className="inline-block border border-brand-red text-brand-dark text-[0.75rem] tracking-[0.2em] uppercase px-10 py-4 hover:bg-brand-red hover:text-white transition-all duration-300"
               >
                 Contact Us
               </a>

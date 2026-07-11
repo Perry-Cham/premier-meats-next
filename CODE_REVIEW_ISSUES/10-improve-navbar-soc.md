@@ -41,7 +41,7 @@ const renderMobileMenuItem = (item: MenuItem) => { ... }
 
 **Goal:**
 
-1. Separate desktop and mobile navbar into dedicated components
+1. Separate desktop and mobile navbar into dedicated component`npx eslint stores/navStore.tsx`s
 2. Extract menu rendering logic into a reusable, type-safe utility
 3. Add proper ARIA labels and semantic HTML
 4. Remove hardcoded defaults (move to separate config file)

@@ -124,7 +124,7 @@ const Navbar1 = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <Button className="text-[0.8rem] bg-[#c41e2a] hover:bg-red-500 transition transition-bg" asChild>
+            <Button className="text-[0.8rem] bg-brand-red hover:bg-brand-red-hover transition transition-bg" asChild>
               <Link href="/contact">Contact Us</Link>
             </Button>
           </div>
@@ -141,7 +141,7 @@ const Navbar1 = ({
                 className="max-h-10 dark:invert"
                 alt={logo.alt}
               />
-              <h1 className="font-bold serif text-2xl text-red-800">Yetu</h1>
+              <h1 className="font-bold serif text-2xl text-brand-red">Yetu</h1>
             </Link>
             </div>
             <Sheet>
@@ -172,7 +172,7 @@ const Navbar1 = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
-                    <Button className="bg-red-600 hover:bg-red-500" asChild>
+                    <Button className="bg-brand-red hover:bg-brand-red-hover" asChild>
                       <Link href="/contact">Contact Us</Link>
                     </Button>
                   </div>

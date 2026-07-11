@@ -20,9 +20,9 @@ export default function EnquiryBar() {
     >
       <a
         href="/contact"
-        className="inline-flex items-center gap-4 bg-[#1c1917] text-white text-[0.7rem] tracking-[0.2em] uppercase px-8 py-4 rounded-sm shadow-2xl hover:bg-[#c41e2a] transition-colors duration-300"
+        className="inline-flex items-center gap-4 bg-brand-dark text-white text-[0.7rem] tracking-[0.2em] uppercase px-8 py-4 rounded-sm shadow-2xl hover:bg-brand-red transition-colors duration-300"
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-[#a87c3e] animate-pulse" />
+        <span className="w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse" />
         Enquire About Bulk Orders
       </a>
     </motion.div>

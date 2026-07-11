@@ -7,7 +7,6 @@ import { LoaderCircle } from "lucide-react";
 
 
 //Implement ISR here for performace by figuring out some way to get this thing to work with the dynamic parameter of category by putting it in the sus[ense so that it works. it doesn't though yet so gahhhhhh. In the meantime I will remove the use cache check until next time futurer me. 
-
 interface Image {
   createdAt: string;
   updatedAt: string;

@@ -12,8 +12,7 @@
 /* LANDING PAGE STYLES */
 .home-page {
   font-family: Jost, sans-serif;
-  background: #f7f4ef;
-  color: #1c1917;
+  @apply bg-brand-cream text-brand-dark;
 }
 .serif {
   font-family: "Cormorant Garamond", serif;
@@ -23,7 +22,7 @@
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #a87c3e;
+  @apply text-brand-gold;
 }
 .section-label.light {
   color: rgb(255 190 99);
@@ -33,7 +32,7 @@
   display: block;
   width: 48px;
   height: 2px;
-  background: #c41e2a;
+  @apply bg-brand-red;
   margin-bottom: 1rem;
 }
 .gold-divider {
@@ -69,8 +68,7 @@
 /* PRODUCT PAGE STYLES */
 .beef-page {
   font-family: var(--font-jost), sans-serif;
-  background: #f7f4ef;
-  color: #1c1917;
+  @apply bg-brand-cream text-brand-dark;
 }
 
 
@@ -96,8 +94,7 @@
 /* ABOUT PAGE STYLES */
 .about-page {
   font-family: "Jost", sans-serif;
-  background: #f7f4ef;
-  color: #1c1917;
+  @apply bg-brand-cream text-brand-dark;
 }
 
 .section-label {
@@ -105,14 +102,14 @@
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #a87c3e;
+  @apply text-brand-gold;
 }
 .red-rule::before {
   content: "";
   display: block;
   width: 48px;
   height: 2px;
-  background: #c41e2a;
+  @apply bg-brand-red;
   margin-bottom: 1rem;
 }
 /*======= TAILWIND STYLES ====== */

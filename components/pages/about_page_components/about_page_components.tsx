@@ -111,16 +111,16 @@ export function Pill({
       transition={{ ...EASE, delay: index * 0.07 }}
       className={`flex items-center gap-3 border rounded-sm px-5 py-3 transition-colors duration-300 cursor-default ${
         accent
-          ? "border-[#c41e2a]/25 bg-white hover:border-[#c41e2a] hover:bg-[#fff8f8]"
-          : "border-[#a87c3e]/25 bg-white hover:border-[#a87c3e] hover:bg-[#fdfaf6]"
+          ? "border-brand-red/25 bg-white hover:border-brand-red hover:bg-brand-red-tint"
+          : "border-brand-gold/25 bg-white hover:border-brand-gold hover:bg-brand-gold-tint"
       }`}
     >
       <span
-        className={`text-base ${accent ? "text-[#c41e2a]" : "text-[#a87c3e]"}`}
+        className={`text-base ${accent ? "text-brand-red" : "text-brand-gold"}`}
       >
         ✦
       </span>
-      <span className="text-[#1c1917] text-sm tracking-wide">{label}</span>
+      <span className="text-brand-dark text-sm tracking-wide">{label}</span>
     </motion.div>
   );
 }
@@ -138,15 +138,15 @@ export function ResponsibilityCard({
   return (
     <Reveal direction="up" delay={index * 120}>
       <motion.div
-        className="bg-white border border-[#e8e2d9] rounded-sm p-7 h-full"
+        className="bg-white border border-brand-border rounded-sm p-7 h-full"
         whileHover={{ y: -4, boxShadow: "0 16px 40px rgba(28,25,23,0.09)" }}
         transition={SPRING}
       >
-        <div className="w-8 h-0.5 bg-[#c41e2a] mb-5" />
-        <p className="text-[0.65rem] tracking-[0.22em] uppercase text-[#a87c3e] mb-3">
+        <div className="w-8 h-0.5 bg-brand-red mb-5" />
+        <p className="text-[0.65rem] tracking-[0.22em] uppercase text-brand-gold mb-3">
           To the {to}
         </p>
-        <p className="text-[#78716c] text-sm leading-relaxed">{body}</p>
+        <p className="text-brand-muted text-sm leading-relaxed">{body}</p>
       </motion.div>
     </Reveal>
   );
@@ -165,7 +165,7 @@ export function QualityCard({
   return (
     <Reveal direction="up" delay={index * 100}>
       <motion.div
-        className="relative bg-white border border-[#e8e2d9] rounded-sm p-7 overflow-hidden"
+        className="relative bg-white border border-brand-border rounded-sm p-7 overflow-hidden"
         whileHover={{ borderColor: "#c41e2a", backgroundColor: "#fff8f8" }}
         transition={{ duration: 0.25 }}
       >
@@ -177,7 +177,7 @@ export function QualityCard({
         >
           {num}
         </motion.div>
-        <p className="text-[#1c1917] text-sm leading-relaxed font-medium">
+        <p className="text-brand-dark text-sm leading-relaxed font-medium">
           {body}
         </p>
       </motion.div>

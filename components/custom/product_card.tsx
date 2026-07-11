@@ -25,21 +25,21 @@ export default function Product_Card({ product }: Props) {
 
   const badgeColor =
     badge === "Prime"
-      ? "bg-[#c41e2a] text-white"
+      ? "bg-brand-red text-white"
       : badge === "Premium"
-        ? "bg-[#1c1917] text-white"
-        : "bg-[#a87c3e] text-white";
+        ? "bg-brand-dark text-white"
+        : "bg-brand-gold text-white";
 
   return (
     <motion.div
-      className="group relative bg-white rounded-sm overflow-hidden border border-[#e8e2d9] flex flex-col cursor-default"
+      className="group relative bg-white rounded-sm overflow-hidden border border-brand-border flex flex-col cursor-default"
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       whileHover={{ y: -6, boxShadow: "0 28px 56px rgba(28,25,23,0.13)" }}
       transition={SPRING}
     >
       {/* image */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-[#f0ece4]">
+      <div className="relative aspect-[4/3] overflow-hidden bg-brand-off-white">
         {imagesrc ? (
           <motion.img
             src={imagesrc}
@@ -49,7 +49,7 @@ export default function Product_Card({ product }: Props) {
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-[#c8bfb0]">
+          <div className="w-full h-full flex items-center justify-center text-brand-placeholder">
             <svg
               width="40"
               height="40"
@@ -64,7 +64,7 @@ export default function Product_Card({ product }: Props) {
             </svg>
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1c1917]/15 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/15 to-transparent" />
 
         {badge && (
           <div
@@ -74,7 +74,7 @@ export default function Product_Card({ product }: Props) {
           </div>
         )}
         {weight && (
-          <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-[#1c1917] text-[0.65rem] tracking-wide px-2.5 py-1 rounded-sm font-medium">
+          <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-brand-dark text-[0.65rem] tracking-wide px-2.5 py-1 rounded-sm font-medium">
             {weight}
           </div>
         )}
@@ -83,42 +83,42 @@ export default function Product_Card({ product }: Props) {
       {/* body */}
       <div className="flex flex-col flex-1 p-5">
         {subcategory && (
-          <p className="text-[0.65rem] tracking-[0.2em] uppercase text-[#a87c3e] mb-1">
+          <p className="text-[0.65rem] tracking-[0.2em] uppercase text-brand-gold mb-1">
             {subcategory}
           </p>
         )}
         <h3
-          className="serif text-xl font-light text-[#1c1917] mb-2 leading-snug"
+          className="serif text-xl font-light text-brand-dark mb-2 leading-snug"
           style={{ fontFamily: "'Cormorant Garamond', serif" }}
         >
           {name}
         </h3>
         {desc && (
-          <p className="text-[#78716c] text-xs leading-relaxed flex-1 line-clamp-2">
+          <p className="text-brand-muted text-xs leading-relaxed flex-1 line-clamp-2">
             {desc}
           </p>
         )}
 
-        <div className="mt-4 pt-4 border-t border-[#f0ece4] flex items-end justify-between">
+        <div className="mt-4 pt-4 border-t border-brand-off-white flex items-end justify-between">
           {formattedPrice ? (
             <div>
-              <span className="text-[0.6rem] tracking-widest uppercase text-[#78716c]">
+              <span className="text-[0.6rem] tracking-widest uppercase text-brand-muted">
                 From
               </span>
               <div
-                className="text-2xl font-light text-[#c41e2a] leading-none mt-0.5"
+                className="text-2xl font-light text-brand-red leading-none mt-0.5"
                 style={{ fontFamily: "'Cormorant Garamond', serif" }}
               >
                 {formattedPrice}
               </div>
             </div>
           ) : (
-            <div className="text-[0.65rem] tracking-wide uppercase text-[#78716c]">
+            <div className="text-[0.65rem] tracking-wide uppercase text-brand-muted">
               Price on enquiry
             </div>
           )}
           <motion.div
-            className="flex items-center gap-1.5 text-[#a87c3e] text-[0.65rem] tracking-[0.18em] uppercase"
+            className="flex items-center gap-1.5 text-brand-gold text-[0.65rem] tracking-[0.18em] uppercase"
             animate={{ x: hovered ? 4 : 0 }}
             transition={SPRING}
           >

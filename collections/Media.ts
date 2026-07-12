@@ -16,7 +16,7 @@ export const Media: CollectionConfig = {
       hooks: {
         beforeChange: [({ data, value }): string => {
           if (!value) {
-            return createTitle(data.filename);
+            return createTitle(data!.filename);
           } else return value
         }]
       }

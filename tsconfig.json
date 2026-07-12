@@ -40,6 +40,8 @@
     ".next/dev/types/**/*.ts"
 , "components/pages/about_page_components"  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "node_modules/.pnpm/@types+node@20.5.7/node_modules/@types/node/diagnostics_channel.d.ts"
+    
   ]
 }
